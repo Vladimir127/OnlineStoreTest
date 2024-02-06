@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OnlineStoreTest</string>
+    <string name="login">Войти</string>
 </resources>

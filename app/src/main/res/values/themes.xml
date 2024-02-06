@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.OnlineStoreTest" parent="Base.Theme.OnlineStoreTest" />
+
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_marginStart">@dimen/margin_default</item>
+        <item name="android:layout_marginTop">@dimen/margin_default</item>
+        <item name="android:layout_marginEnd">@dimen/margin_default</item>
+    </style>
 </resources>
