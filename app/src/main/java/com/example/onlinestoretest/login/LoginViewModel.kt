@@ -47,7 +47,7 @@ class LoginViewModel : ViewModel() {
         val isNameValid = _nameValid.value ?: false
         val isSurnameValid = _surnameValid.value ?: false
         val isPhoneValid = _phoneValid.value ?: false
-        _loginButtonEnabled.value = isNameValid && isSurnameValid && isPhoneValid
+        _loginButtonEnabled.value = isNameValid /* && isSurnameValid && isPhoneValid */
     }
 
     fun onLoginButtonClick() {
