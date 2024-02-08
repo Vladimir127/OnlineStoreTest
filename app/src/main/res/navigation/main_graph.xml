@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.onlinestoretest.main.MainFragment"
+        android:name="com.example.onlinestoretest.ui.main.HomeFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/catalogFragment"
-        android:name="com.example.onlinestoretest.main.CatalogFragment"
+        android:name="com.example.onlinestoretest.ui.main.catalog.CatalogFragment"
         android:label="fragment_catalog"
         tools:layout="@layout/fragment_catalog" />
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.example.onlinestoretest.main.CartFragment"
+        android:name="com.example.onlinestoretest.ui.main.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/promotionsFragment"
-        android:name="com.example.onlinestoretest.main.PromotionsFragment"
+        android:name="com.example.onlinestoretest.ui.main.PromotionsFragment"
         android:label="fragment_promotions"
         tools:layout="@layout/fragment_promotions" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.onlinestoretest.main.ProfileFragment"
+        android:name="com.example.onlinestoretest.ui.main.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

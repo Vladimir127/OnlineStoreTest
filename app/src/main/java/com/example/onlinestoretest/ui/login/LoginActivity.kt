@@ -1,4 +1,4 @@
-package com.example.onlinestoretest.login
+package com.example.onlinestoretest.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +8,7 @@ import android.text.TextWatcher
 import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.onlinestoretest.main.MainActivity
+import com.example.onlinestoretest.ui.main.MainActivity
 import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.ActivityLoginBinding
 import com.google.android.material.textfield.TextInputEditText

@@ -1,4 +1,4 @@
-package com.example.onlinestoretest.main
+package com.example.onlinestoretest.ui.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
