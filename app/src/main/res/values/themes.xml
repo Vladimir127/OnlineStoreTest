@@ -31,4 +31,9 @@
     <style name="TextInputEditTextStyle" parent="Widget.Material3.TextInputEditText.FilledBox">
         <item name="android:backgroundTint">#D8D8D8</item>
     </style>
+
+    <style name="StrikeThroughTextView">
+        <item name="android:textStyle">normal</item>
+        <item name="android:foreground">@drawable/strike_through</item>
+    </style>
 </resources>

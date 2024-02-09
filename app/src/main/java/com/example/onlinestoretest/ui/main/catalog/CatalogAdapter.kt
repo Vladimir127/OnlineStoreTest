@@ -9,10 +9,34 @@ import com.example.onlinestoretest.databinding.ItemProductBinding
 import com.example.onlinestoretest.domain.Product
 
 class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ProductViewHolder>() {
-    private var products: List<Product> = emptyList()
+    private var originalProducts: List<Product> = emptyList()
+    private var currentProducts: List<Product> = emptyList()
 
     fun setData(products: List<Product>) {
-        this.products = products
+        this.originalProducts = products
+        this.currentProducts = products
+        notifyDataSetChanged()
+    }
+
+    fun filterByTag(tag: String) {
+        val filteredList =
+            if (tag == "watch_all")
+                originalProducts
+            else
+                originalProducts.filter { product ->
+                    product.tags.contains(tag)
+                }
+        currentProducts = filteredList
+        notifyDataSetChanged()
+    }
+
+    fun sortBy(sortOption: String) {
+        currentProducts = when (sortOption) {
+            "По популярности" -> currentProducts.sortedByDescending { it.feedback.rating }
+            "По уменьшению цены" -> currentProducts.sortedByDescending { it.price.priceWithDiscount.toDouble() }
+            "По возрастанию цены" -> currentProducts.sortedBy { it.price.priceWithDiscount.toDouble() }
+            else -> currentProducts
+        }
         notifyDataSetChanged()
     }
 
@@ -24,10 +48,10 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ProductViewHolder>() 
         )
     }
 
-    override fun getItemCount() = products.size
+    override fun getItemCount() = currentProducts.size
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(products[position])
+        holder.bind(currentProducts[position])
     }
 
     class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -46,6 +70,22 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ProductViewHolder>() 
 
             binding.titleTextView.text = product.title
             binding.subtitleTextView.text = product.subtitle
+            binding.oldPriceTextView.text = "${product.price.price} ${product.price.unit}"
+            binding.priceTextView.text = "${product.price.priceWithDiscount} ${product.price.unit}"
+            binding.discountTextView.text = "-${product.price.discount}%"
+
+            if (product.feedback == null) {
+                binding.zvImageView.visibility = View.INVISIBLE
+                binding.ratingTextView.visibility = View.INVISIBLE
+                binding.countTextView.visibility = View.INVISIBLE
+            } else {
+                binding.zvImageView.visibility = View.VISIBLE
+                binding.ratingTextView.visibility = View.VISIBLE
+                binding.countTextView.visibility = View.VISIBLE
+
+                binding.ratingTextView.text = product.feedback.rating.toString()
+                binding.countTextView.text = "(${product.feedback.count})"
+            }
         }
     }
 }
