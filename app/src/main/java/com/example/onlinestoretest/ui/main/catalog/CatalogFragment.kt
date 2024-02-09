@@ -22,7 +22,7 @@ class CatalogFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: CatalogViewModel
-    private val catalogAdapter = CatalogAdapter()
+    private lateinit var catalogAdapter: CatalogAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +40,7 @@ class CatalogFragment : Fragment() {
             val gridLayoutManager = GridLayoutManager(context, 2)
             layoutManager = gridLayoutManager
 
+            catalogAdapter = CatalogAdapter(context)
             adapter = catalogAdapter
 
             viewModel = ViewModelProvider(this@CatalogFragment)[CatalogViewModel::class.java]

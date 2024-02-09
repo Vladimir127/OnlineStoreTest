@@ -1,151 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="287dp"
-    xmlns:tools="http://schemas.android.com/tools"
-    app:cardCornerRadius="@dimen/corner_radius"
-    android:layout_margin="@dimen/card_view_margin">
+    android:layout_margin="@dimen/card_view_margin"
+    app:cardCornerRadius="@dimen/corner_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/image_view"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/image_view_pager"
             android:layout_width="0dp"
             android:layout_height="@dimen/image_height"
-            android:src="@drawable/product_image"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:tabBackground="@drawable/tab_pager_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/image_view_pager"/>
 
         <ImageButton
             android:id="@+id/add_to_favorite_button"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_heart_stroke"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@android:color/transparent"
             android:layout_marginTop="6dp"
-            android:layout_marginEnd="6dp"/>
+            android:layout_marginEnd="6dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_heart_stroke"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/old_price_text_view"
+            style="@style/StrikeThroughTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sf_pro_display_regular"
-            android:textSize="@dimen/element_text_size"
-            android:textColor="@color/text_grey"
-            tools:text="000 ₽"
-            app:layout_constraintTop_toBottomOf="@id/image_view"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="2dp"
             android:layout_marginStart="6dp"
+            android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
-            style="@style/StrikeThroughTextView"/>
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:textColor="@color/text_grey"
+            android:textSize="@dimen/element_text_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view_pager"
+            tools:text="000 ₽" />
 
         <TextView
             android:id="@+id/price_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sf_pro_display_medium"
-            android:textSize="@dimen/title2_size"
-            android:textColor="@color/black"
-            tools:text="000 ₽"
-            app:layout_constraintTop_toBottomOf="@id/old_price_text_view"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="6dp"
-            android:layout_marginTop="2dp"/>
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/sf_pro_display_medium"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title2_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/old_price_text_view"
+            tools:text="000 ₽" />
 
         <TextView
             android:id="@+id/discount_text_view"
             android:layout_width="34dp"
             android:layout_height="16dp"
-            android:fontFamily="@font/sf_pro_display_regular"
-            android:textSize="@dimen/element_text_size"
-            android:textColor="@color/white"
-            tools:text="-00 %"
-            android:gravity="center"
-            app:layout_constraintTop_toTopOf="@+id/price_text_view"
-            app:layout_constraintStart_toEndOf="@id/price_text_view"
-            app:layout_constraintBottom_toBottomOf="@id/price_text_view"
             android:layout_marginStart="@dimen/margin_half"
-            android:background="@drawable/rounded_rectangle_pink"/>
+            android:background="@drawable/rounded_rectangle_pink"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/element_text_size"
+            app:layout_constraintBottom_toBottomOf="@id/price_text_view"
+            app:layout_constraintStart_toEndOf="@id/price_text_view"
+            app:layout_constraintTop_toTopOf="@+id/price_text_view"
+            tools:text="-00 %" />
 
         <TextView
             android:id="@+id/title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="ESFOLIO"
-            android:textSize="16sp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="2dp"
             android:fontFamily="@font/sf_pro_display_medium"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/discount_text_view"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="2dp"/>
+            tools:text="ESFOLIO" />
 
         <TextView
             android:id="@+id/subtitle_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="Лосьон для тела `ESFOLIO` COENZYME Q10 Увлажняющий 500 мл"
-            android:textSize="10sp"
-            android:lines="3"
-            android:fontFamily="@font/sf_pro_display_regular"
             android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"
             android:layout_marginTop="2dp"
+            android:layout_marginEnd="6dp"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:lines="3"
+            android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/title_text_view"
+            tools:text="Лосьон для тела `ESFOLIO` COENZYME Q10 Увлажняющий 500 мл" />
 
         <ImageView
             android:id="@+id/zv_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_star"
-            app:layout_constraintTop_toBottomOf="@id/subtitle_text_view"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="4dp"
             android:layout_marginStart="4dp"
-            android:layout_marginEnd="2dp"/>
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="2dp"
+            android:src="@drawable/ic_star"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/subtitle_text_view" />
 
         <TextView
             android:id="@+id/rating_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="0.0"
-            android:textSize="9sp"
+            android:layout_marginStart="2dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:textColor="@color/orange"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@id/zv_image_view"
             app:layout_constraintStart_toEndOf="@id/zv_image_view"
             app:layout_constraintTop_toTopOf="@id/zv_image_view"
-            app:layout_constraintBottom_toBottomOf="@id/zv_image_view"
-            android:layout_marginStart="2dp"/>
+            tools:text="0.0" />
 
         <TextView
             android:id="@+id/count_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="(0)"
-            android:textSize="9sp"
+            android:layout_marginStart="2dp"
             android:fontFamily="@font/sf_pro_display_regular"
             android:textColor="@color/text_grey"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="@id/rating_text_view"
             app:layout_constraintStart_toEndOf="@id/rating_text_view"
             app:layout_constraintTop_toTopOf="@id/rating_text_view"
-            app:layout_constraintBottom_toBottomOf="@id/rating_text_view"
-            android:layout_marginStart="2dp"/>
+            tools:text="(0)" />
 
         <ImageButton
             android:id="@+id/add_to_cart_button"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:background="@drawable/bg_favorite_button"
             android:src="@drawable/ic_plus"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/bg_favorite_button"/>
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
 

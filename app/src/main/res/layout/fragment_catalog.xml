@@ -77,7 +77,7 @@
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        tools:listitem="@layout/item_product"
+        tools:listitem="@layout/item_product_linear"
         android:paddingTop="@dimen/recycler_view_padding"
         android:paddingStart="@dimen/recycler_view_padding"
         android:paddingEnd="@dimen/recycler_view_padding"
