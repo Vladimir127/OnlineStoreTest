@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.ItemProductBinding
@@ -65,7 +67,14 @@ class CatalogAdapter(val context: Context) : RecyclerView.Adapter<CatalogAdapter
     override fun getItemCount() = currentProducts.size
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(currentProducts[position])
+        val product = currentProducts[position]
+
+        holder.bind(product)
+
+        holder.itemView.setOnClickListener {
+            val action = CatalogFragmentDirections.actionCatalogFragmentToProductFragment(product)
+            it.findNavController().navigate(action)
+        }
     }
 
     inner class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
