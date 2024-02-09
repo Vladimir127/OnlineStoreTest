@@ -75,7 +75,7 @@
             android:layout_width="34dp"
             android:layout_height="16dp"
             android:layout_marginStart="@dimen/margin_half"
-            android:background="@drawable/rounded_rectangle_pink"
+            android:background="@drawable/rounded_rectangle_pink_small_radius"
             android:fontFamily="@font/sf_pro_display_regular"
             android:gravity="center"
             android:textColor="@color/white"
