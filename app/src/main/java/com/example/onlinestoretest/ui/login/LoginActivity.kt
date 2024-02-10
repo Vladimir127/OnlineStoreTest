@@ -5,14 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.onlinestoretest.ui.main.MainActivity
-import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.ActivityLoginBinding
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var viewModel: LoginViewModel
@@ -25,6 +21,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+
+        viewModel.checkUserData()
 
         // Валидация полей ввода
         binding.nameEditText.addTextChangedListener(object : TextWatcher {
@@ -87,7 +85,10 @@ class LoginActivity : AppCompatActivity() {
 
         // Обработка нажатия на кнопку "Войти"
         binding.loginButton.setOnClickListener {
-            viewModel.onLoginButtonClick()
+            val name = binding.nameEditText.text.toString()
+            val surname = binding.surnameEditText.text.toString()
+            val phone = binding.phoneEditText.text.toString()
+            viewModel.onLoginButtonClick(name, surname, phone)
         }
 
         viewModel.navigateToMain.observe(this, Observer { navigateToMain ->

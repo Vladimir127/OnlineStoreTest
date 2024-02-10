@@ -1,10 +1,14 @@
 package com.example.onlinestoretest.ui.login
 
+import android.app.Application
+import android.text.Editable
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.onlinestoretest.infrastructure.MyApp
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val _navigateToMain = MutableLiveData<Boolean>()
     val navigateToMain: LiveData<Boolean>
         get() = _navigateToMain
@@ -24,6 +28,8 @@ class LoginViewModel : ViewModel() {
     private val _loginButtonEnabled = MutableLiveData<Boolean>().apply { value = false }
     val loginButtonEnabled: LiveData<Boolean>
         get() = _loginButtonEnabled
+
+    private val userRepository by lazy { (application as MyApp).userRepository }
 
     fun validateName(name: String) {
         val regex = Regex("^[А-Яа-я]+$")
@@ -47,10 +53,17 @@ class LoginViewModel : ViewModel() {
         val isNameValid = _nameValid.value ?: false
         val isSurnameValid = _surnameValid.value ?: false
         val isPhoneValid = _phoneValid.value ?: false
-        _loginButtonEnabled.value = isNameValid /* && isSurnameValid && isPhoneValid */
+        _loginButtonEnabled.value = isNameValid && isSurnameValid && isPhoneValid
     }
 
-    fun onLoginButtonClick() {
+    fun onLoginButtonClick(name: String, surname: String, phone: String) {
+        userRepository.saveUserData(name, surname, phone)
         _navigateToMain.value = true
+    }
+
+    fun checkUserData() {
+        if (userRepository.isUserDataFilled()) {
+            _navigateToMain.value = true
+        }
     }
 }

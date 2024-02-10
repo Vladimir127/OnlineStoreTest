@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 class CatalogViewModel(application: Application) : AndroidViewModel(application) {
     private val _products: MutableLiveData<List<Product>> = MutableLiveData()
 
-    private val catalogRepository by lazy { (application as MyApp).repository }
+    private val catalogRepository by lazy { (application as MyApp).catalogRepository }
 
     val products: LiveData<List<Product>>
         get() = _products
