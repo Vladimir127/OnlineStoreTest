@@ -11,4 +11,29 @@
     <string name="price_with_unit">"%1$s" "%2$s"</string>
     <string name="discount">-"%1$d"%%</string>
     <string name="feedback_count">("%1$d")</string>
+    <string name="rating">"%1.1f" ⋅ "%2$s"</string>
+    <string name="available">Доступно для заказа "%1$s"</string>
+
+
+    <string name="description">Описание</string>
+    <string name="hide">Скрыть</string>
+    <string name="characteristics">Характеристики</string>
+    <string name="ingredients">Состав</string>
+    <string name="read_more">Подробнее</string>
+    <string name="add_to_cart">Добавить в корзину</string>
+
+    <plurals name="reviews">
+        <item quantity="one">%d отзыв</item>
+        <item quantity="few">%d отзыва</item>
+        <item quantity="many">%d отзывов</item>
+        <item quantity="other">%d отзывов</item>
+    </plurals>
+
+    <plurals name="pieces">
+        <item quantity="one">%d штука</item>
+        <item quantity="few">%d штуки</item>
+        <item quantity="many">%d штук</item>
+        <item quantity="other">%d штук</item>
+    </plurals>
+
 </resources>

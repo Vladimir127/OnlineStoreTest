@@ -1,4 +1,4 @@
-package com.example.onlinestoretest.ui.main.catalog
+package com.example.onlinestoretest.ui.main.common
 
 import android.view.LayoutInflater
 import android.view.View
