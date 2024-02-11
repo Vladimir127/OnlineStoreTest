@@ -2,55 +2,72 @@ package com.example.onlinestoretest.ui.main.catalog
 
 import android.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CompoundButton
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.onlinestoretest.databinding.FragmentCatalogBinding
-import com.example.onlinestoretest.domain.Product
 import com.google.android.material.chip.Chip
 
-class CatalogFragment : Fragment() {
+class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
 
     private var _binding: FragmentCatalogBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var viewModel: CatalogViewModel
-    private lateinit var catalogAdapter: CatalogAdapter
+    private lateinit var productAdapter: ProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCatalogBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel = ViewModelProvider(this@CatalogFragment)[CatalogViewModel::class.java]
+
+        productAdapter = ProductAdapter(requireContext())
+        productAdapter.onItemClickListener = object : ProductAdapter.OnItemClickListener {
+            override fun onItemClick(productId: String) {
+                val action = CatalogFragmentDirections.actionCatalogFragmentToProductFragment(productId)
+                view.findNavController().navigate(action)
+            }
+        }
+
+        productAdapter.favoriteItemClickListener = object : ProductAdapter.FavoriteItemClickListener {
+            override fun onToggleFavorite(productId: String) {
+                viewModel.toggleFavorite(productId)
+            }
+        }
+
         binding.recyclerView.apply {
             val gridLayoutManager = GridLayoutManager(context, 2)
             layoutManager = gridLayoutManager
 
-            catalogAdapter = CatalogAdapter(context)
-            adapter = catalogAdapter
 
-            viewModel = ViewModelProvider(this@CatalogFragment)[CatalogViewModel::class.java]
 
-            viewModel.products.observe(viewLifecycleOwner, Observer { products ->
-                catalogAdapter.setData(products)
-                catalogAdapter.sortBy("По популярности")
-            })
-            viewModel.loadProducts()
+
+            adapter = productAdapter
+
+
         }
+
+        viewModel.products.observe(viewLifecycleOwner, Observer { products ->
+            productAdapter.setData(products)
+            productAdapter.sortBy("По популярности")
+        })
+        viewModel.loadProducts()
 
         initSpinner()
         initChips()
@@ -67,7 +84,7 @@ class CatalogFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedSortOption = sortOptions[position]
                 // Вызов метода в адаптере для выполнения сортировки
-                catalogAdapter.sortBy(selectedSortOption)
+                productAdapter.sortBy(selectedSortOption)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -82,7 +99,7 @@ class CatalogFragment : Fragment() {
 
             val chip = group.findViewById<Chip>(checkedId)
             chip?.let { selectedTag = chip.tag.toString() }
-            catalogAdapter.filterByTag(selectedTag)
+            productAdapter.filterByTag(selectedTag)
         }
 
         binding.watchAllChip.setOnCheckedChangeListener { compoundButton, checked ->
@@ -129,5 +146,9 @@ class CatalogFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onToggleFavorite(productId: String) {
+
     }
 }

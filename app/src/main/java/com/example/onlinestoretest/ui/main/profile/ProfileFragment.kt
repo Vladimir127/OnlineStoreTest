@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.FragmentProfileBinding
 import com.example.onlinestoretest.ui.login.LoginActivity
-import com.example.onlinestoretest.ui.main.MainActivity
 
 class ProfileFragment : Fragment() {
 
@@ -38,6 +38,12 @@ class ProfileFragment : Fragment() {
         }
         profileViewModel.loadData()
 
+        profileViewModel.favoritesCount.observe(viewLifecycleOwner) { count ->
+            val favoritesCountText = resources.getQuantityString(R.plurals.products, count, count)
+            binding.favCountTextView.text = favoritesCountText
+        }
+        profileViewModel.loadFavoritesCount()
+
         profileViewModel.navigateToLogin.observe(viewLifecycleOwner) { navigateToLogin ->
             if (navigateToLogin) {
                 val intent = Intent(requireContext(), LoginActivity::class.java)
@@ -45,6 +51,11 @@ class ProfileFragment : Fragment() {
                 activity?.finish()
             }
         }
+
+        binding.favoritesLayout.setOnClickListener {
+            it.findNavController().navigate(R.id.action_profileFragment_to_favoritesFragment)
+        }
+
         binding.logoutButton.setOnClickListener{
             profileViewModel.logout()
         }

@@ -66,6 +66,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/favorites_layout"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:background="@drawable/rounded_rectangle_grey"

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,8 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.FragmentProductBinding
 import com.example.onlinestoretest.domain.Product
@@ -21,23 +22,26 @@ import com.example.onlinestoretest.utils.ImageMapUtil.Companion.imageMap
 import com.example.onlinestoretest.utils.dpToPx
 import com.google.android.material.tabs.TabLayoutMediator
 
-private const val ARG_PARAM1 = "product"
+private const val ARG_PARAM1 = "productId"
 
 class ProductFragment : Fragment() {
     private var _binding: FragmentProductBinding? = null
     private val binding get() = _binding!!
 
     private var product: Product? = null
+    private var productId: String? = ""
 
     private var isDescriptionVisible = true
     private var areIngredientsExpanded = false
+
+    private lateinit var viewModel: ProductViewModel
 
     private val imageAdapter = ImageAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            product = it.getParcelable(ARG_PARAM1)
+            productId = it.getString(ARG_PARAM1)
         }
     }
 
@@ -52,9 +56,23 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.imageViewPager.adapter = imageAdapter
+        viewModel = ViewModelProvider(this@ProductFragment)[ProductViewModel::class.java]
 
+
+
+        viewModel.product.observe(viewLifecycleOwner) {
+            this.product = it
+            displayData()
+        }
+        productId?.let {
+            viewModel.loadProduct(productId!!)
+        }
+    }
+
+    private fun displayData() {
         initViewPager()
+
+        setFavoriteButtonIcon()
 
         binding.titleTextView.text = product?.title
         binding.subtitleTextView.text = product?.subtitle
@@ -182,10 +200,18 @@ class ProductFragment : Fragment() {
         binding.oldPriceTextView1.text = resources.getString(R.string.price_with_unit, product?.price?.price, product?.price?.unit)
     }
 
+    private fun setFavoriteButtonIcon() {
+        if (product?.isFavorite == true) {
+            binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_filled)
+        } else {
+            binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_stroke)
+        }
+    }
+
     private fun initViewPager() {
+        binding.imageViewPager.adapter = imageAdapter
         imageAdapter.setData(imageMap[product?.id] ?: emptyList())
         TabLayoutMediator(binding.tabLayout, binding.imageViewPager) { tab, position ->}.attach()
-
     }
 
     override fun onDestroyView() {

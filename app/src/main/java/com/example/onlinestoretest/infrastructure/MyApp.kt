@@ -2,15 +2,16 @@ package com.example.onlinestoretest.infrastructure
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
+import androidx.room.Room
 import com.example.onlinestoretest.data.repositories.CatalogRepository
+import com.example.onlinestoretest.data.repositories.CombinedCatalogRepositoryImpl
+import com.example.onlinestoretest.data.repositories.LocalDataSource
 import com.example.onlinestoretest.data.repositories.UserRepository
 import com.example.onlinestoretest.data.repositories.UserRepositoryImpl
-import com.example.onlinestoretest.data.repositories.WebCatalogRepositoryImpl
+import com.example.onlinestoretest.data.repositories.WebDataSource
 import com.example.onlinestoretest.data.retrofit.ProductService
-import com.example.onlinestoretest.ui.login.LoginActivity
-import com.example.onlinestoretest.ui.main.MainActivity
+import com.example.onlinestoretest.data.room.AppDatabase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
@@ -30,10 +31,27 @@ class MyApp : Application() {
             .build()
     }
 
-    private val productService: ProductService by lazy { retrofit.create(ProductService::class.java)}
+    private val database by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "favorites-db"
+        ).build()
+    }
+
+    private val favoriteDao by lazy {
+        database.favoriteDao()
+    }
+
+    private val localDataSource by lazy {
+        LocalDataSource(favoriteDao)
+    }
+
+    private val productService: ProductService by lazy { retrofit.create(ProductService::class.java) }
+
+    private val webDataSource by lazy { WebDataSource(productService) }
 
     val catalogRepository: CatalogRepository by lazy {
-        WebCatalogRepositoryImpl(productService)
+        CombinedCatalogRepositoryImpl(localDataSource, webDataSource)
     }
 
     private val sharedPreferences: SharedPreferences by lazy {

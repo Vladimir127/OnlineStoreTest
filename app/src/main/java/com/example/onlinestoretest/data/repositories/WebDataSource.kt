@@ -5,8 +5,8 @@ import com.example.onlinestoretest.domain.Product
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class WebCatalogRepositoryImpl(private val productService: ProductService): CatalogRepository {
-    override suspend fun getProducts(): List<Product> {
+class WebDataSource(private val productService: ProductService) {
+    suspend fun getProducts(): List<Product> {
         return withContext(Dispatchers.IO) {
             try {
                 productService.getProducts("").items
@@ -14,5 +14,10 @@ class WebCatalogRepositoryImpl(private val productService: ProductService): Cata
                 throw e
             }
         }
+    }
+
+    suspend fun getProduct(id: String): Product? {
+        val products = getProducts()
+        return products.find { it.id == id }
     }
 }

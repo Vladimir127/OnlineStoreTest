@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.ItemProductBinding
@@ -13,7 +12,10 @@ import com.example.onlinestoretest.ui.main.common.ImageAdapter
 import com.example.onlinestoretest.utils.ImageMapUtil.Companion.imageMap
 import com.google.android.material.tabs.TabLayoutMediator
 
-class CatalogAdapter(val context: Context) : RecyclerView.Adapter<CatalogAdapter.ProductViewHolder>() {
+class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+    var onItemClickListener: OnItemClickListener? = null
+    var favoriteItemClickListener: FavoriteItemClickListener? = null
+
     private var originalProducts: List<Product> = emptyList()
     private var currentProducts: List<Product> = emptyList()
 
@@ -61,8 +63,7 @@ class CatalogAdapter(val context: Context) : RecyclerView.Adapter<CatalogAdapter
         holder.bind(product)
 
         holder.itemView.setOnClickListener {
-            val action = CatalogFragmentDirections.actionCatalogFragmentToProductFragment(product)
-            it.findNavController().navigate(action)
+            onItemClickListener?.onItemClick(product.id)
         }
     }
 
@@ -75,12 +76,14 @@ class CatalogAdapter(val context: Context) : RecyclerView.Adapter<CatalogAdapter
         init {
             binding.imageViewPager.adapter = imageAdapter
 
+
         }
 
         fun bind(product: Product) {
             this.product = product
 
             initViewPager()
+            initFavoriteButton()
 
             binding.titleTextView.text = product.title
             binding.subtitleTextView.text = product.subtitle
@@ -107,5 +110,31 @@ class CatalogAdapter(val context: Context) : RecyclerView.Adapter<CatalogAdapter
             imageAdapter.setData(imageMap[product.id] ?: emptyList())
             TabLayoutMediator(binding.tabLayout, binding.imageViewPager) { tab, position -> }.attach()
         }
+
+        private fun initFavoriteButton() {
+            setFavoriteButtonIcon()
+
+            binding.addToFavoriteButton.setOnClickListener {
+                favoriteItemClickListener?.onToggleFavorite(product.id)
+                product.isFavorite = !product.isFavorite
+                setFavoriteButtonIcon()
+            }
+        }
+
+        private fun setFavoriteButtonIcon() {
+            if (product.isFavorite) {
+                binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_filled)
+            } else {
+                binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_stroke)
+            }
+        }
+    }
+
+    interface FavoriteItemClickListener {
+        fun onToggleFavorite(productId: String)
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(productId: String)
     }
 }

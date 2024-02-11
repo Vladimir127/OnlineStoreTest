@@ -43,4 +43,10 @@
         <item quantity="other">%d штук</item>
     </plurals>
 
+    <plurals name="products">
+        <item quantity="one">%d товар</item>
+        <item quantity="few">%d товара</item>
+        <item quantity="many">%d товаров</item>
+        <item quantity="other">%d товаров</item>
+    </plurals>
 </resources>
