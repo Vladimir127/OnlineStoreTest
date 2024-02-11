@@ -1,26 +1,25 @@
 package com.example.onlinestoretest.infrastructure
 
 import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
-import androidx.room.Room
-import com.example.onlinestoretest.data.repositories.CatalogRepository
-import com.example.onlinestoretest.data.repositories.CombinedCatalogRepositoryImpl
-import com.example.onlinestoretest.data.repositories.LocalDataSource
-import com.example.onlinestoretest.data.repositories.UserRepository
-import com.example.onlinestoretest.data.repositories.UserRepositoryImpl
-import com.example.onlinestoretest.data.repositories.WebDataSource
-import com.example.onlinestoretest.data.retrofit.ProductService
-import com.example.onlinestoretest.data.room.AppDatabase
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-
-private const val BASE_URL = "https://run.mocky.io/v3/97e721a7-0a66-4cae-b445-83cc0bcf9010/"
+import com.example.onlinestoretest.domain.di.AppComponent
+import com.example.onlinestoretest.domain.di.DaggerAppComponent
+import com.example.onlinestoretest.domain.di.DbModule
+import com.example.onlinestoretest.domain.di.NetworkModule
+import com.example.onlinestoretest.domain.di.RepositoryModule
+import com.example.onlinestoretest.domain.di.UserModule
 
 class MyApp : Application() {
-    private var gson: Gson = GsonBuilder()
+
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.builder()
+            .networkModule(NetworkModule())
+            .dbModule(DbModule(this))
+            .repositoryModule(RepositoryModule())
+            .userModule(UserModule())
+            .build()
+    }
+
+    /*private var gson: Gson = GsonBuilder()
         .setLenient()
         .create()
 
@@ -30,6 +29,8 @@ class MyApp : Application() {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
+
+    private val productService: ProductService by lazy { retrofit.create(ProductService::class.java) }
 
     private val database by lazy {
         Room.databaseBuilder(
@@ -46,8 +47,6 @@ class MyApp : Application() {
         LocalDataSource(favoriteDao)
     }
 
-    private val productService: ProductService by lazy { retrofit.create(ProductService::class.java) }
-
     private val webDataSource by lazy { WebDataSource(productService) }
 
     val catalogRepository: CatalogRepository by lazy {
@@ -60,5 +59,5 @@ class MyApp : Application() {
 
     val userRepository: UserRepository by lazy {
         UserRepositoryImpl(sharedPreferences)
-    }
+    }*/
 }

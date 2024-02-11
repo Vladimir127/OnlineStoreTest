@@ -5,13 +5,27 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.onlinestoretest.data.repositories.CatalogRepository
+import com.example.onlinestoretest.data.repositories.UserRepository
 import com.example.onlinestoretest.domain.UserData
 import com.example.onlinestoretest.infrastructure.MyApp
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class ProfileViewModel(application: Application) : AndroidViewModel(application) {
-    private val userRepository by lazy { (application as MyApp).userRepository }
-    private val catalogRepository by lazy { (application as MyApp).catalogRepository }
+    @Inject
+    lateinit var userRepository: UserRepository
+
+    init {
+        (application as MyApp).appComponent.inject(this)
+    }
+
+    @Inject
+    lateinit var catalogRepository: CatalogRepository
+
+    init {
+        (application as MyApp).appComponent.inject(this)
+    }
 
     private val _userData = MutableLiveData<UserData>()
     val userData: LiveData<UserData>

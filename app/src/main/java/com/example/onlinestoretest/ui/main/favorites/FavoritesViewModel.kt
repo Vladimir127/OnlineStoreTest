@@ -5,12 +5,19 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.onlinestoretest.data.repositories.CatalogRepository
 import com.example.onlinestoretest.domain.Product
 import com.example.onlinestoretest.infrastructure.MyApp
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class FavoritesViewModel(application: Application): AndroidViewModel(application) {
-    private val catalogRepository by lazy { (application as MyApp).catalogRepository }
+    @Inject
+    lateinit var catalogRepository: CatalogRepository
+
+    init {
+        (application as MyApp).appComponent.inject(this)
+    }
 
     private val _favoriteProducts: MutableLiveData<List<Product>> = MutableLiveData()
 

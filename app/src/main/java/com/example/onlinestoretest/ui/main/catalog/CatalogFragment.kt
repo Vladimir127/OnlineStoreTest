@@ -9,11 +9,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.onlinestoretest.databinding.FragmentCatalogBinding
+import com.example.onlinestoretest.ui.main.common.ProductAdapter
 import com.google.android.material.chip.Chip
 
 class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
@@ -63,10 +63,10 @@ class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
 
         }
 
-        viewModel.products.observe(viewLifecycleOwner, Observer { products ->
+        viewModel.products.observe(viewLifecycleOwner) { products ->
             productAdapter.setData(products)
             productAdapter.sortBy("По популярности")
-        })
+        }
         viewModel.loadProducts()
 
         initSpinner()
