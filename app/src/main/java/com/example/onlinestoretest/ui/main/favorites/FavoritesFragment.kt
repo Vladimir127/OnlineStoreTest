@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.onlinestoretest.databinding.FragmentFavoritesBinding
-import com.example.onlinestoretest.ui.main.catalog.ProductAdapter
+import com.example.onlinestoretest.ui.main.common.ProductAdapter
 
 class FavoritesFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
 

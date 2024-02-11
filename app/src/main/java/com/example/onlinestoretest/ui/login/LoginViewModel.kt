@@ -1,12 +1,12 @@
 package com.example.onlinestoretest.ui.login
 
 import android.app.Application
-import android.text.Editable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.onlinestoretest.data.repositories.UserRepository
 import com.example.onlinestoretest.infrastructure.MyApp
+import javax.inject.Inject
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
     private val _navigateToMain = MutableLiveData<Boolean>()
@@ -29,7 +29,12 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     val loginButtonEnabled: LiveData<Boolean>
         get() = _loginButtonEnabled
 
-    private val userRepository by lazy { (application as MyApp).userRepository }
+    @Inject
+    lateinit var userRepository: UserRepository
+
+    init {
+        (application as MyApp).appComponent.inject(this)
+    }
 
     fun validateName(name: String) {
         val regex = Regex("^[А-Яа-я]+$")

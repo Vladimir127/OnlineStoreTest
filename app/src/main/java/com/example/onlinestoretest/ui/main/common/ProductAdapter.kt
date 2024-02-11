@@ -1,4 +1,4 @@
-package com.example.onlinestoretest.ui.main.catalog
+package com.example.onlinestoretest.ui.main.common
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.ItemProductBinding
 import com.example.onlinestoretest.domain.Product
-import com.example.onlinestoretest.ui.main.common.ImageAdapter
 import com.example.onlinestoretest.utils.ImageMapUtil.Companion.imageMap
 import com.google.android.material.tabs.TabLayoutMediator
 
