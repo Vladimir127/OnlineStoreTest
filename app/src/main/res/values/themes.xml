@@ -6,4 +6,45 @@
     </style>
 
     <style name="Theme.OnlineStoreTest" parent="Base.Theme.OnlineStoreTest" />
+
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_marginStart">@dimen/margin_default</item>
+        <item name="android:layout_marginTop">@dimen/margin_default</item>
+        <item name="android:layout_marginEnd">@dimen/margin_default</item>
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="android:layout_marginStart">@dimen/margin_default</item>
+        <item name="android:layout_marginTop">@dimen/margin_default</item>
+        <item name="android:layout_marginEnd">@dimen/margin_default</item>
+        <item name="boxCornerRadiusTopStart">@dimen/margin_half</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/margin_half</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/margin_half</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/margin_half</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeColor">@android:color/transparent</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="endIconDrawable">@drawable/ic_clear</item>
+        <item name="errorEnabled">true</item>
+    </style>
+
+    <style name="TextInputEditTextStyle" parent="Widget.Material3.TextInputEditText.FilledBox">
+        <item name="android:backgroundTint">#D8D8D8</item>
+    </style>
+
+    <style name="StrikeThroughTextView">
+        <item name="android:textStyle">normal</item>
+        <item name="android:foreground">@drawable/strike_through</item>
+    </style>
+
+    <style name="StrikeThroughTextViewTransparent">
+        <item name="android:textStyle">normal</item>
+        <item name="android:foreground">@drawable/strike_through_transparent</item>
+    </style>
+
+    <style name="CustomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
+        <item name="android:minHeight">23dip</item>
+        <item name="android:maxHeight">25dip</item>
+    </style>
 </resources>

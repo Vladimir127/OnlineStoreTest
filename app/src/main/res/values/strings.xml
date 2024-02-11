@@ -1,3 +1,52 @@
 <resources>
     <string name="app_name">OnlineStoreTest</string>
+    <string name="login">Войти</string>
+    <string name="main">Главная</string>
+    <string name="catalog">Каталог</string>
+    <string name="cart">Корзина</string>
+    <string name="promotions">Акции</string>
+    <string name="profile">Профиль</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="price_with_unit">"%1$s" "%2$s"</string>
+    <string name="discount">-"%1$d"%%</string>
+    <string name="feedback_count">("%1$d")</string>
+    <string name="rating">"%1.1f" ⋅ "%2$s"</string>
+    <string name="available">Доступно для заказа "%1$s"</string>
+    <string name="full_name">"%1$s" "%2$s"</string>
+
+
+    <string name="description">Описание</string>
+    <string name="hide">Скрыть</string>
+    <string name="characteristics">Характеристики</string>
+    <string name="ingredients">Состав</string>
+    <string name="read_more">Подробнее</string>
+    <string name="add_to_cart">Добавить в корзину</string>
+    <string name="favorite">Избранное</string>
+    <string name="shops">Магазины</string>
+    <string name="feedback">Обратная связь</string>
+    <string name="offer">Оферта</string>
+    <string name="refund">Возврат товара</string>
+    <string name="logout">Выйти</string>
+
+    <plurals name="reviews">
+        <item quantity="one">%d отзыв</item>
+        <item quantity="few">%d отзыва</item>
+        <item quantity="many">%d отзывов</item>
+        <item quantity="other">%d отзывов</item>
+    </plurals>
+
+    <plurals name="pieces">
+        <item quantity="one">%d штука</item>
+        <item quantity="few">%d штуки</item>
+        <item quantity="many">%d штук</item>
+        <item quantity="other">%d штук</item>
+    </plurals>
+
+    <plurals name="products">
+        <item quantity="one">%d товар</item>
+        <item quantity="few">%d товара</item>
+        <item quantity="many">%d товаров</item>
+        <item quantity="other">%d товаров</item>
+    </plurals>
 </resources>
