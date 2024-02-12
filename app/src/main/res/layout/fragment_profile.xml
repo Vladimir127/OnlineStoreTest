@@ -115,7 +115,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_right"
+            android:src="@drawable/ic_arrow_right"
             android:layout_marginEnd="@dimen/margin_half"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -157,7 +157,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_right"
+            android:src="@drawable/ic_arrow_right"
             android:layout_marginEnd="@dimen/margin_half"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -199,7 +199,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_right"
+            android:src="@drawable/ic_arrow_right"
             android:layout_marginEnd="@dimen/margin_half"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -219,7 +219,7 @@
             android:id="@+id/offer_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_doc"
+            android:src="@drawable/ic_list"
             android:layout_marginStart="@dimen/margin_half"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -241,7 +241,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_right"
+            android:src="@drawable/ic_arrow_right"
             android:layout_marginEnd="@dimen/margin_half"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -261,7 +261,7 @@
             android:id="@+id/back_image_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
+            android:src="@drawable/ic_refund"
             android:layout_marginStart="@dimen/margin_half"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -283,7 +283,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/arrow_right"
+            android:src="@drawable/ic_arrow_right"
             android:layout_marginEnd="@dimen/margin_half"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

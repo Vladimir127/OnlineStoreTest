@@ -1,8 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.OnlineStoreTest" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
     </style>
 
     <style name="Theme.OnlineStoreTest" parent="Base.Theme.OnlineStoreTest" />
@@ -63,5 +62,8 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
+    <style name="BottomNavigationTextStyle">
+        <item name="android:fontFamily">@font/sf_pro_display_regular</item>
+        <item name="android:textSize">10sp</item>
+    </style>
 </resources>

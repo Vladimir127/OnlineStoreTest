@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/mainFragment"
-        android:icon="@drawable/ic_main"
+        android:icon="@drawable/ic_home"
         android:menuCategory="secondary"
         android:title="@string/main" />
 
     <item
         android:id="@+id/catalogFragment"
-        android:icon="@drawable/ic_catalog"
+        android:icon="@drawable/ic_list"
         android:menuCategory="secondary"
         android:title="@string/catalog" />
 
