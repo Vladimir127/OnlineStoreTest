@@ -23,10 +23,19 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     val product: LiveData<Product?>
         get() = _product
 
+    private val _error: MutableLiveData<Throwable> = MutableLiveData()
+    val error: LiveData<Throwable>
+        get() = _error
+
     fun loadProduct(productId: String) {
         viewModelScope.launch {
-            val product = catalogRepository.getProduct(productId)
-            _product.value = product
+            try {
+                val product = catalogRepository.getProduct(productId)
+                _product.value = product
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _error.value = e
+            }
         }
     }
 }

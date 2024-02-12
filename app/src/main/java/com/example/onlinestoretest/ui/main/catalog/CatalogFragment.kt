@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.onlinestoretest.databinding.FragmentCatalogBinding
+import com.example.onlinestoretest.domain.Product
 import com.example.onlinestoretest.ui.main.common.ProductAdapter
 import com.google.android.material.chip.Chip
 
@@ -64,9 +65,13 @@ class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
         }
 
         viewModel.products.observe(viewLifecycleOwner) { products ->
-            productAdapter.setData(products)
-            productAdapter.sortBy("По популярности")
+            showData(products)
         }
+        viewModel.error.observe(viewLifecycleOwner) {
+            showError()
+        }
+
+        showLoading()
         viewModel.loadProducts()
 
         initSpinner()
@@ -150,5 +155,31 @@ class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
 
     override fun onToggleFavorite(productId: String) {
 
+    }
+
+    private fun showLoading() {
+        binding.errorLayout.visibility = View.INVISIBLE
+        binding.loadingLayout.visibility = View.VISIBLE
+        binding.dataLayout.visibility = View.INVISIBLE
+    }
+
+    private fun showData(products: List<Product>) {
+        binding.errorLayout.visibility = View.INVISIBLE
+        binding.loadingLayout.visibility = View.INVISIBLE
+        binding.dataLayout.visibility = View.VISIBLE
+
+        productAdapter.setData(products)
+        productAdapter.sortBy("По популярности")
+    }
+
+    private fun showError() {
+        binding.errorLayout.visibility = View.VISIBLE
+        binding.loadingLayout.visibility = View.INVISIBLE
+        binding.dataLayout.visibility = View.INVISIBLE
+
+        binding.retryButton.setOnClickListener {
+            showLoading()
+            viewModel.loadProducts()
+        }
     }
 }

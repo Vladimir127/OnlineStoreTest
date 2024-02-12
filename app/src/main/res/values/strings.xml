@@ -29,6 +29,8 @@
     <string name="offer">Оферта</string>
     <string name="refund">Возврат товара</string>
     <string name="logout">Выйти</string>
+    <string name="error_loading_data">Ошибка при загрузке данных</string>
+    <string name="retry">Повторить попытку</string>
 
     <plurals name="reviews">
         <item quantity="one">%d отзыв</item>

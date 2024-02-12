@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.onlinestoretest.databinding.FragmentFavoritesBinding
+import com.example.onlinestoretest.domain.Product
 import com.example.onlinestoretest.ui.main.common.ProductAdapter
 
 class FavoritesFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
@@ -53,8 +54,13 @@ class FavoritesFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
         }
 
         viewModel.favoriteProducts.observe(viewLifecycleOwner) { favoriteProducts ->
-            productAdapter.setData(favoriteProducts)
+            showData(favoriteProducts)
         }
+        viewModel.error.observe(viewLifecycleOwner) {
+            showError()
+        }
+
+        showLoading()
         viewModel.loadFavorites()
     }
 
@@ -65,5 +71,30 @@ class FavoritesFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
 
     override fun onToggleFavorite(productId: String) {
 
+    }
+
+    private fun showLoading() {
+        binding.errorLayout.visibility = View.INVISIBLE
+        binding.loadingLayout.visibility = View.VISIBLE
+        binding.dataLayout.visibility = View.INVISIBLE
+    }
+
+    private fun showData(products: List<Product>) {
+        binding.errorLayout.visibility = View.INVISIBLE
+        binding.loadingLayout.visibility = View.INVISIBLE
+        binding.dataLayout.visibility = View.VISIBLE
+
+        productAdapter.setData(products)
+    }
+
+    private fun showError() {
+        binding.errorLayout.visibility = View.VISIBLE
+        binding.loadingLayout.visibility = View.INVISIBLE
+        binding.dataLayout.visibility = View.INVISIBLE
+
+        binding.retryButton.setOnClickListener {
+            showLoading()
+            viewModel.loadFavorites()
+        }
     }
 }

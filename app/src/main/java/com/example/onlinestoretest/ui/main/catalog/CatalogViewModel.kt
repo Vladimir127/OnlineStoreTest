@@ -23,6 +23,10 @@ class CatalogViewModel (application: Application) : AndroidViewModel(application
     val products: LiveData<List<Product>>
         get() = _products
 
+    private val _error: MutableLiveData<Throwable> = MutableLiveData()
+    val error: LiveData<Throwable>
+        get() = _error
+
     fun loadProducts() {
         viewModelScope.launch {
             try {
@@ -30,6 +34,7 @@ class CatalogViewModel (application: Application) : AndroidViewModel(application
                 _products.value = products
             } catch (e: Exception) {
                 e.printStackTrace()
+                _error.value = e
             }
         }
     }

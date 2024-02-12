@@ -24,10 +24,19 @@ class FavoritesViewModel(application: Application): AndroidViewModel(application
     val favoriteProducts: LiveData<List<Product>>
         get() = _favoriteProducts
 
+    private val _error: MutableLiveData<Throwable> = MutableLiveData()
+    val error: LiveData<Throwable>
+        get() = _error
+
     fun loadFavorites(){
         viewModelScope.launch {
-            val products = catalogRepository.getFavorites()
-            _favoriteProducts.value = products
+            try {
+                val products = catalogRepository.getFavorites()
+                _favoriteProducts.value = products
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _error.value = e
+            }
         }
     }
 

@@ -58,18 +58,50 @@ class ProductFragment : Fragment() {
 
         viewModel = ViewModelProvider(this@ProductFragment)[ProductViewModel::class.java]
 
-
-
         viewModel.product.observe(viewLifecycleOwner) {
             this.product = it
-            displayData()
+            showData()
         }
+        viewModel.error.observe(viewLifecycleOwner) {
+            showError()
+        }
+
+        showLoading()
         productId?.let {
             viewModel.loadProduct(productId!!)
         }
     }
 
-    private fun displayData() {
+    private fun setFavoriteButtonIcon() {
+        if (product?.isFavorite == true) {
+            binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_filled)
+        } else {
+            binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_stroke)
+        }
+    }
+
+    private fun initViewPager() {
+        binding.imageViewPager.adapter = imageAdapter
+        imageAdapter.setData(imageMap[product?.id] ?: emptyList())
+        TabLayoutMediator(binding.tabLayout, binding.imageViewPager) { tab, position ->}.attach()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun showLoading() {
+        binding.errorLayout.visibility = View.INVISIBLE
+        binding.loadingLayout.visibility = View.VISIBLE
+        binding.dataLayout.visibility = View.INVISIBLE
+    }
+
+    private fun showData() {
+        binding.errorLayout.visibility = View.INVISIBLE
+        binding.loadingLayout.visibility = View.INVISIBLE
+        binding.dataLayout.visibility = View.VISIBLE
+
         initViewPager()
 
         setFavoriteButtonIcon()
@@ -195,27 +227,20 @@ class ProductFragment : Fragment() {
             areIngredientsExpanded = !areIngredientsExpanded
         }
 
-
         binding.priceTextView1.text = resources.getString(R.string.price_with_unit, product?.price?.priceWithDiscount, product?.price?.unit)
         binding.oldPriceTextView1.text = resources.getString(R.string.price_with_unit, product?.price?.price, product?.price?.unit)
     }
 
-    private fun setFavoriteButtonIcon() {
-        if (product?.isFavorite == true) {
-            binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_filled)
-        } else {
-            binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_stroke)
+    private fun showError() {
+        binding.errorLayout.visibility = View.VISIBLE
+        binding.loadingLayout.visibility = View.INVISIBLE
+        binding.dataLayout.visibility = View.INVISIBLE
+
+        binding.retryButton.setOnClickListener {
+            showLoading()
+            productId?.let {
+                viewModel.loadProduct(productId!!)
+            }
         }
-    }
-
-    private fun initViewPager() {
-        binding.imageViewPager.adapter = imageAdapter
-        imageAdapter.setData(imageMap[product?.id] ?: emptyList())
-        TabLayoutMediator(binding.tabLayout, binding.imageViewPager) { tab, position ->}.attach()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
