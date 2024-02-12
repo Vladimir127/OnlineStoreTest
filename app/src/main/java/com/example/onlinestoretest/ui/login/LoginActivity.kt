@@ -1,14 +1,25 @@
 package com.example.onlinestoretest.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.TypedValue
+import android.view.Gravity
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.onlinestoretest.ui.main.MainActivity
+import com.example.onlinestoretest.CenteredTitleToolbar
+import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.ActivityLoginBinding
+import com.example.onlinestoretest.ui.main.MainActivity
+import com.example.onlinestoretest.utils.dpToPx
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var viewModel: LoginViewModel
@@ -17,8 +28,11 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        initToolbar()
 
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
@@ -98,5 +112,30 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         })
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(binding.toolbar)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white))
+        }
+
+        supportActionBar?.let { actionBar ->
+            actionBar.title = resources.getString(R.string.login)
+
+            val centeredTitleToolbar = binding.toolbar as CenteredTitleToolbar
+            centeredTitleToolbar.titleTextView?.let { titleTextView ->
+                titleTextView.typeface = ResourcesCompat.getFont(this, R.font.sf_pro_display_medium)
+                titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
+                titleTextView.setTextColor(Color.BLACK)
+
+                val layoutParams = titleTextView.layoutParams as Toolbar.LayoutParams
+                layoutParams.gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
+                layoutParams.bottomMargin = 10.dpToPx(this)
+                titleTextView.layoutParams = layoutParams
+            }
+        }
     }
 }
