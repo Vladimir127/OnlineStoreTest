@@ -1,12 +1,12 @@
 package com.example.onlinestoretest.infrastructure
 
 import android.app.Application
-import com.example.onlinestoretest.domain.di.AppComponent
-import com.example.onlinestoretest.domain.di.DaggerAppComponent
-import com.example.onlinestoretest.domain.di.DbModule
-import com.example.onlinestoretest.domain.di.NetworkModule
-import com.example.onlinestoretest.domain.di.RepositoryModule
-import com.example.onlinestoretest.domain.di.UserModule
+import com.example.onlinestoretest.di.AppComponent
+import com.example.onlinestoretest.di.DaggerAppComponent
+import com.example.onlinestoretest.di.DbModule
+import com.example.onlinestoretest.di.NetworkModule
+import com.example.onlinestoretest.di.RepositoryModule
+import com.example.onlinestoretest.di.UserModule
 
 class MyApp : Application() {
 

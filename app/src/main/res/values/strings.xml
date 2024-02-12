@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">OnlineStoreTest</string>
-    <string name="login">Войти</string>
+    <string name="to_log_in">Войти</string>
+    <string name="login">Вход</string>
     <string name="main">Главная</string>
     <string name="catalog">Каталог</string>
     <string name="cart">Корзина</string>
@@ -28,6 +29,9 @@
     <string name="offer">Оферта</string>
     <string name="refund">Возврат товара</string>
     <string name="logout">Выйти</string>
+    <string name="error_loading_data">Ошибка при загрузке данных</string>
+    <string name="retry">Повторить попытку</string>
+    <string name="terms_and_conditions">Нажимая кнопку “Войти”, Вы принимаете \nусловия программы лояльности</string>
 
     <plurals name="reviews">
         <item quantity="one">%d отзыв</item>
