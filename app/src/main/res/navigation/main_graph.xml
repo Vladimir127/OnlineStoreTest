@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.onlinestoretest.ui.main.HomeFragment"
+        android:name="com.example.onlinestoretest.presentation.main.HomeFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/catalogFragment"
-        android:name="com.example.onlinestoretest.ui.main.catalog.CatalogFragment"
+        android:name="com.example.onlinestoretest.presentation.main.catalog.CatalogFragment"
         android:label="fragment_catalog"
         tools:layout="@layout/fragment_catalog" >
         <action
@@ -21,17 +21,17 @@
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.example.onlinestoretest.ui.main.CartFragment"
+        android:name="com.example.onlinestoretest.presentation.main.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/promotionsFragment"
-        android:name="com.example.onlinestoretest.ui.main.PromotionsFragment"
+        android:name="com.example.onlinestoretest.presentation.main.PromotionsFragment"
         android:label="fragment_promotions"
         tools:layout="@layout/fragment_promotions" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.onlinestoretest.ui.main.profile.ProfileFragment"
+        android:name="com.example.onlinestoretest.presentation.main.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/productFragment"
-        android:name="com.example.onlinestoretest.ui.main.product.ProductFragment"
+        android:name="com.example.onlinestoretest.presentation.main.product.ProductFragment"
         android:label="fragment_product"
         tools:layout="@layout/fragment_product" >
         <argument
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.example.onlinestoretest.ui.main.favorites.FavoritesFragment"
+        android:name="com.example.onlinestoretest.presentation.main.favorites.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
