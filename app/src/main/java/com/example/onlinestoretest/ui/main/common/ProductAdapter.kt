@@ -60,10 +60,6 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
         val product = currentProducts[position]
 
         holder.bind(product)
-
-        holder.itemView.setOnClickListener {
-            onItemClickListener?.onItemClick(product.id)
-        }
     }
 
     inner class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -74,8 +70,6 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
 
         init {
             binding.imageViewPager.adapter = imageAdapter
-
-
         }
 
         fun bind(product: Product) {
@@ -83,6 +77,7 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
 
             initViewPager()
             initFavoriteButton()
+            setOnClickListeners()
 
             binding.titleTextView.text = product.title
             binding.subtitleTextView.text = product.subtitle
@@ -102,6 +97,8 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
                 binding.ratingTextView.text = product.feedback.rating.toString()
                 binding.countTextView.text = context.resources.getString(R.string.feedback_count, product.feedback.count)
             }
+
+
         }
 
         private fun initViewPager() {
@@ -125,6 +122,18 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
                 binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_filled)
             } else {
                 binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_stroke)
+            }
+        }
+
+        private fun setOnClickListeners() {
+            itemView.setOnClickListener {
+                onItemClickListener?.onItemClick(product.id)
+            }
+
+            imageAdapter.onImageClickListener = object : ImageAdapter.OnImageClickListener{
+                override fun onImageClick() {
+                    onItemClickListener?.onItemClick(product.id)
+                }
             }
         }
     }

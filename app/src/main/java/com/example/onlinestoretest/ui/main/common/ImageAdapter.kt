@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.onlinestoretest.R
 import com.squareup.picasso.Picasso
 
-class ImageAdapter() : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
+class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
+    var onImageClickListener: OnImageClickListener? = null
     private var images: List<Int> = emptyList()
 
     fun setData(images: List<Int>) {
@@ -22,14 +23,25 @@ class ImageAdapter() : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val imageResourceId = images[position]
-        //holder.imageView.setImageResource(imageResource)
-        Picasso.get().load(imageResourceId).into(holder.imageView)
+        holder.bind(position)
     }
 
     override fun getItemCount(): Int = images.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.imageView)
+        private val imageView: ImageView = itemView.findViewById(R.id.imageView)
+
+        fun bind(position: Int) {
+            val imageResourceId = images[position]
+            Picasso.get().load(imageResourceId).into(imageView)
+
+            itemView.setOnClickListener {
+                onImageClickListener?.onImageClick()
+            }
+        }
+    }
+
+    interface OnImageClickListener {
+        fun onImageClick()
     }
 }
