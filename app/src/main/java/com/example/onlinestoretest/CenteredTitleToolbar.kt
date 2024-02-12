@@ -3,11 +3,13 @@ package com.example.onlinestoretest
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import com.example.onlinestoretest.utils.dpToPx
 
@@ -55,8 +57,12 @@ class CenteredTitleToolbar @JvmOverloads constructor(
         addView(shareButton)
 
         titleTextView = TextView(context).apply {
+            typeface = ResourcesCompat.getFont(context, R.font.sf_pro_display_medium)
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
+            setTextColor(Color.BLACK)
             gravity = Gravity.CENTER_VERTICAL or Gravity.START
             layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT).apply {
+                gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
                 marginStart = 21.dpToPx(context)
                 marginEnd = 21.dpToPx(context)
                 bottomMargin = 21.dpToPx(context)

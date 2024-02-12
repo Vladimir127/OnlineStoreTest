@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.mainFragment -> {
-                    //supportActionBar?.setDisplayHomeAsUpEnabled(false)
                     binding.toolbar.backButton?.visibility = View.GONE
                     binding.toolbar.titleTextView?.gravity = Gravity.CENTER
                     binding.toolbar.shareButton?.visibility = View.GONE

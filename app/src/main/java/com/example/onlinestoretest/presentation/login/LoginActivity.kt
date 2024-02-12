@@ -1,25 +1,21 @@
 package com.example.onlinestoretest.presentation.login
 
 import android.content.Intent
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableString
 import android.text.TextWatcher
-import android.util.TypedValue
+import android.text.style.UnderlineSpan
 import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.onlinestoretest.CenteredTitleToolbar
 import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.ActivityLoginBinding
 import com.example.onlinestoretest.presentation.main.MainActivity
-import com.example.onlinestoretest.utils.dpToPx
+import com.google.android.material.textfield.TextInputEditText
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var viewModel: LoginViewModel
@@ -75,13 +71,64 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        binding.phoneEditText.setText("+7 ")
+        binding.phoneEditText.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                (view as? TextInputEditText)?.let { editText ->
+                    editText.setSelection(editText.text?.length ?: 0)
+                }
+            }
+        }
+
         binding.phoneEditText.addTextChangedListener(object : TextWatcher {
+            private var isFormatting = false
+            private val digitPattern = "\\d"
+
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun afterTextChanged(p0: Editable?) {
+                if (isFormatting) {
+                    return
+                }
+                isFormatting = true
+
+                if (p0.toString().length <= 3) {
+                    p0?.replace(0, p0.length, "+7 ")
+                }
+
+                val formattedText = formatPhoneNumber(p0.toString().substring(3))
+                p0?.replace(3, p0.length, formattedText)
+
+                isFormatting = false
+
                 viewModel.validatePhone(p0.toString())
+            }
+
+            private fun formatPhoneNumber(phoneNumber: String): String {
+                val sb = StringBuilder()
+                //sb.append("+7 ")
+
+                var digitCount = 0
+
+                for (c in phoneNumber) {
+                    if (c.toString().matches(digitPattern.toRegex())) {
+//                        if (digitCount == 0) {
+//                            sb.append("+")
+//                        } else
+                            if (digitCount == 3) {
+                            sb.append(" ")
+                        } else if (digitCount == 6 || digitCount == 8) {
+                            sb.append("-")
+                        }
+
+                        sb.append(c)
+                        digitCount++
+                    }
+                }
+
+                return sb.toString()
             }
         })
 
@@ -112,30 +159,33 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         })
+
+        initConditionsTextView()
+    }
+
+    private fun initConditionsTextView() {
+        val text = resources.getString(R.string.terms_and_conditions)
+        val spannableString = SpannableString(text)
+        spannableString.setSpan(UnderlineSpan(), 39, text.length, 0)
+        binding.conditionsTextView.text = spannableString
     }
 
     private fun initToolbar() {
         setSupportActionBar(binding.toolbar)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white))
-        }
+        // Убираем границу между StatusBar и ActionBar, а также устаналиваем белый цвет
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, android.R.color.white))
 
+        // Устанавливаем текст заголовка
         supportActionBar?.let { actionBar ->
             actionBar.title = resources.getString(R.string.login)
+        }
 
-            val centeredTitleToolbar = binding.toolbar as CenteredTitleToolbar
-            centeredTitleToolbar.titleTextView?.let { titleTextView ->
-                titleTextView.typeface = ResourcesCompat.getFont(this, R.font.sf_pro_display_medium)
-                titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
-                titleTextView.setTextColor(Color.BLACK)
-
-                val layoutParams = titleTextView.layoutParams as Toolbar.LayoutParams
-                layoutParams.gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
-                layoutParams.bottomMargin = 10.dpToPx(this)
-                titleTextView.layoutParams = layoutParams
-            }
+        // Устанавливаем заголовок посередине
+        val centeredTitleToolbar = binding.toolbar
+        centeredTitleToolbar.titleTextView?.let { titleTextView ->
+            titleTextView.gravity = Gravity.CENTER
         }
     }
 }

@@ -31,6 +31,7 @@
     <string name="logout">Выйти</string>
     <string name="error_loading_data">Ошибка при загрузке данных</string>
     <string name="retry">Повторить попытку</string>
+    <string name="terms_and_conditions">Нажимая кнопку “Войти”, Вы принимаете \nусловия программы лояльности</string>
 
     <plurals name="reviews">
         <item quantity="one">%d отзыв</item>
