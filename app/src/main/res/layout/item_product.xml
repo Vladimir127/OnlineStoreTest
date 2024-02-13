@@ -19,20 +19,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--        <com.google.android.material.tabs.TabLayout-->
-        <!--            android:id="@+id/tab_layout"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_gravity="center_horizontal"-->
-        <!--            app:tabBackground="@drawable/tab_pager_selector"-->
-        <!--            android:background="?attr/colorPrimary"-->
-        <!--            android:textColor="#FFFFFF"-->
-        <!--            app:tabGravity="center"-->
-        <!--            app:tabIndicatorHeight="0dp"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintBottom_toBottomOf="@id/image_view_pager"/>-->
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="wrap_content"

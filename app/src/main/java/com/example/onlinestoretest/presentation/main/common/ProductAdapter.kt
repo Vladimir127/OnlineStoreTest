@@ -15,10 +15,12 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
     var onItemClickListener: OnItemClickListener? = null
     var favoriteItemClickListener: FavoriteItemClickListener? = null
 
-    private var originalProducts: List<com.example.onlinestoretest.domain.models.Product> = emptyList()
-    private var currentProducts: List<com.example.onlinestoretest.domain.models.Product> = emptyList()
+    private var originalProducts: List<Product> = emptyList()
+    private var currentProducts: List<Product> = emptyList()
 
-    fun setData(products: List<com.example.onlinestoretest.domain.models.Product>) {
+    private var sortOption = context.resources.getString(R.string.sort_popularity)
+
+    fun setData(products: List<Product>) {
         this.originalProducts = products
         this.currentProducts = products
         notifyDataSetChanged()
@@ -33,14 +35,16 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
                     product.tags.contains(tag)
                 }
         currentProducts = filteredList
+        sortBy(this.sortOption)
         notifyDataSetChanged()
     }
 
     fun sortBy(sortOption: String) {
+        this.sortOption = sortOption
         currentProducts = when (sortOption) {
-            "По популярности" -> currentProducts.sortedByDescending { it.feedback.rating }
-            "По уменьшению цены" -> currentProducts.sortedByDescending { it.price.priceWithDiscount.toDouble() }
-            "По возрастанию цены" -> currentProducts.sortedBy { it.price.priceWithDiscount.toDouble() }
+            context.resources.getString(R.string.sort_popularity) -> currentProducts.sortedByDescending { it.feedback.rating }
+            context.resources.getString(R.string.sort_price_descending) -> currentProducts.sortedByDescending { it.price.priceWithDiscount.toDouble() }
+            context.resources.getString(R.string.sort_price_ascending) -> currentProducts.sortedBy { it.price.priceWithDiscount.toDouble() }
             else -> currentProducts
         }
         notifyDataSetChanged()
@@ -65,14 +69,14 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
     inner class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ItemProductBinding.bind(view)
 
-        private lateinit var product: com.example.onlinestoretest.domain.models.Product
+        private lateinit var product: Product
         private val imageAdapter = ImageAdapter()
 
         init {
             binding.imageViewPager.adapter = imageAdapter
         }
 
-        fun bind(product: com.example.onlinestoretest.domain.models.Product) {
+        fun bind(product: Product) {
             this.product = product
 
             initViewPager()
@@ -97,8 +101,6 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
                 binding.ratingTextView.text = product.feedback.rating.toString()
                 binding.countTextView.text = context.resources.getString(R.string.feedback_count, product.feedback.count)
             }
-
-
         }
 
         private fun initViewPager() {

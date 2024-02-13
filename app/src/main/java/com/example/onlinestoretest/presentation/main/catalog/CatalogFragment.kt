@@ -1,17 +1,16 @@
 package com.example.onlinestoretest.presentation.main.catalog
 
-import android.R
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.FragmentCatalogBinding
 import com.example.onlinestoretest.domain.models.Product
 import com.example.onlinestoretest.presentation.main.common.ProductAdapter
@@ -81,8 +80,7 @@ class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
     private fun initSpinner() {
         val sortOptions = arrayOf("По популярности", "По уменьшению цены", "По возрастанию цены")
 
-        val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, sortOptions)
-        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        val adapter = CustomSpinnerAdapter(requireContext(), sortOptions)
         binding.sortSpinner.adapter = adapter
 
         binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -108,42 +106,42 @@ class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
         }
 
         binding.watchAllChip.setOnCheckedChangeListener { compoundButton, checked ->
-            setChipCloseButtonVisibility(
+            setUpChip(
                 compoundButton,
                 checked
             )
         }
 
         binding.faceChip.setOnCheckedChangeListener { compoundButton, checked ->
-            setChipCloseButtonVisibility(
+            setUpChip(
                 compoundButton,
                 checked
             )
         }
 
         binding.bodyChip.setOnCheckedChangeListener { compoundButton, checked ->
-            setChipCloseButtonVisibility(
+            setUpChip(
                 compoundButton,
                 checked
             )
         }
 
         binding.suntanChip.setOnCheckedChangeListener { compoundButton, checked ->
-            setChipCloseButtonVisibility(
+            setUpChip(
                 compoundButton,
                 checked
             )
         }
 
         binding.masksChip.setOnCheckedChangeListener { compoundButton, checked ->
-            setChipCloseButtonVisibility(
+            setUpChip(
                 compoundButton,
                 checked
             )
         }
     }
 
-    private fun setChipCloseButtonVisibility(compoundButton: CompoundButton, checked: Boolean) {
+    private fun setUpChip(compoundButton: CompoundButton, checked: Boolean) {
         val chip = compoundButton as Chip
         chip.isCloseIconVisible = checked
     }
@@ -163,13 +161,13 @@ class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
         binding.dataLayout.visibility = View.INVISIBLE
     }
 
-    private fun showData(products: List<com.example.onlinestoretest.domain.models.Product>) {
+    private fun showData(products: List<Product>) {
         binding.errorLayout.visibility = View.INVISIBLE
         binding.loadingLayout.visibility = View.INVISIBLE
         binding.dataLayout.visibility = View.VISIBLE
 
         productAdapter.setData(products)
-        productAdapter.sortBy("По популярности")
+        productAdapter.sortBy(requireContext().resources.getString(R.string.sort_popularity))
     }
 
     private fun showError() {

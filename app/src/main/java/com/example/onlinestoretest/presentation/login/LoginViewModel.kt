@@ -30,7 +30,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         get() = _loginButtonEnabled
 
     @Inject
-    lateinit var userRepository: com.example.onlinestoretest.domain.repository.UserRepository
+    lateinit var userRepository: UserRepository
 
     init {
         (application as MyApp).appComponent.inject(this)

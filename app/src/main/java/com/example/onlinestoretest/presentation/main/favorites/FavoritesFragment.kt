@@ -79,7 +79,7 @@ class FavoritesFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
         binding.dataLayout.visibility = View.INVISIBLE
     }
 
-    private fun showData(products: List<com.example.onlinestoretest.domain.models.Product>) {
+    private fun showData(products: List<Product>) {
         binding.errorLayout.visibility = View.INVISIBLE
         binding.loadingLayout.visibility = View.INVISIBLE
         binding.dataLayout.visibility = View.VISIBLE

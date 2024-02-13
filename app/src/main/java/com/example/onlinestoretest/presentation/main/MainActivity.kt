@@ -14,7 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import com.example.onlinestoretest.CenteredTitleToolbar
+import com.example.onlinestoretest.utils.CenteredTitleToolbar
 import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.ActivityMainBinding
 import com.example.onlinestoretest.utils.dpToPx
@@ -89,11 +89,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-//        binding.toolbar.setNavigationOnClickListener {
-//            val activity = context as? AppCompatActivity
-//            activity?.onBackPressed()
-//        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

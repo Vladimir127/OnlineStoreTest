@@ -10,7 +10,6 @@ import android.view.Gravity
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.onlinestoretest.R
 import com.example.onlinestoretest.databinding.ActivityLoginBinding
@@ -49,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
             if (isValid) {
                 binding.nameLayout.error = null;
             } else {
-                binding.nameLayout.error = "Ошибка"
+                binding.nameLayout.error = getString(R.string.error)
             }
         }
 
@@ -67,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
             if (isValid) {
                 binding.surnameLayout.error = null;
             } else {
-                binding.surnameLayout.error = "Ошибка"
+                binding.surnameLayout.error = getString(R.string.error)
             }
         }
 
@@ -114,9 +113,6 @@ class LoginActivity : AppCompatActivity() {
 
                 for (c in phoneNumber) {
                     if (c.toString().matches(digitPattern.toRegex())) {
-//                        if (digitCount == 0) {
-//                            sb.append("+")
-//                        } else
                             if (digitCount == 3) {
                             sb.append(" ")
                         } else if (digitCount == 6 || digitCount == 8) {
@@ -136,7 +132,7 @@ class LoginActivity : AppCompatActivity() {
             if (isValid) {
                 binding.phoneLayout.error = null;
             } else {
-                binding.phoneLayout.error = "Ошибка"
+                binding.phoneLayout.error = getString(R.string.error)
             }
         }
 
@@ -152,13 +148,13 @@ class LoginActivity : AppCompatActivity() {
             viewModel.onLoginButtonClick(name, surname, phone)
         }
 
-        viewModel.navigateToMain.observe(this, Observer { navigateToMain ->
+        viewModel.navigateToMain.observe(this) { navigateToMain ->
             if (navigateToMain) {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }
-        })
+        }
 
         initConditionsTextView()
     }

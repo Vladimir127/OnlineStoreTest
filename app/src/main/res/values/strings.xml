@@ -32,6 +32,15 @@
     <string name="error_loading_data">Ошибка при загрузке данных</string>
     <string name="retry">Повторить попытку</string>
     <string name="terms_and_conditions">Нажимая кнопку “Войти”, Вы принимаете \nусловия программы лояльности</string>
+    <string name="sort_popularity">По популярности</string>
+    <string name="sort_price_ascending">По возрастанию цены</string>
+    <string name="sort_price_descending">По уменьшению цены</string>
+    <string name="error">Ошибка</string>
+    <string name="tag_watch_all">Смотреть все</string>
+    <string name="tag_face">Лицо</string>
+    <string name="tag_body">Тело</string>
+    <string name="tad_suntan">Загар</string>
+    <string name="tag_mask">Маски</string>
 
     <plurals name="reviews">
         <item quantity="one">%d отзыв</item>

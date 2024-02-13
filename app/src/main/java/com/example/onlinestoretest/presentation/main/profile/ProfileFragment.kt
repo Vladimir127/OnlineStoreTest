@@ -39,8 +39,13 @@ class ProfileFragment : Fragment() {
         profileViewModel.loadData()
 
         profileViewModel.favoritesCount.observe(viewLifecycleOwner) { count ->
-            val favoritesCountText = resources.getQuantityString(R.plurals.products, count, count)
-            binding.favCountTextView.text = favoritesCountText
+            if (count == 0) {
+                binding.favCountTextView.visibility = View.GONE
+            } else {
+                binding.favCountTextView.visibility = View.VISIBLE
+                val favoritesCountText = resources.getQuantityString(R.plurals.products, count, count)
+                binding.favCountTextView.text = favoritesCountText
+            }
         }
         profileViewModel.loadFavoritesCount()
 

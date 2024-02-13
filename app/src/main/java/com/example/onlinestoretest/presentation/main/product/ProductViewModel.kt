@@ -5,22 +5,22 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.onlinestoretest.domain.repository.CatalogRepository
 import com.example.onlinestoretest.domain.models.Product
+import com.example.onlinestoretest.domain.repository.CatalogRepository
 import com.example.onlinestoretest.infrastructure.MyApp
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ProductViewModel(application: Application) : AndroidViewModel(application) {
     @Inject
-    lateinit var catalogRepository: com.example.onlinestoretest.domain.repository.CatalogRepository
+    lateinit var catalogRepository: CatalogRepository
 
     init {
         (application as MyApp).appComponent.inject(this)
     }
 
-    private val _product: MutableLiveData<com.example.onlinestoretest.domain.models.Product?> = MutableLiveData()
-    val product: LiveData<com.example.onlinestoretest.domain.models.Product?>
+    private val _product: MutableLiveData<Product?> = MutableLiveData()
+    val product: LiveData<Product?>
         get() = _product
 
     private val _error: MutableLiveData<Throwable> = MutableLiveData()
@@ -36,6 +36,12 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
                 e.printStackTrace()
                 _error.value = e
             }
+        }
+    }
+
+    fun toggleFavorite(productId: String) {
+        viewModelScope.launch {
+            catalogRepository.toggleFavorite(productId)
         }
     }
 }

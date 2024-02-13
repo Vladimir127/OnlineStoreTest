@@ -28,7 +28,7 @@ class ProductFragment : Fragment() {
     private var _binding: FragmentProductBinding? = null
     private val binding get() = _binding!!
 
-    private var product: com.example.onlinestoretest.domain.models.Product? = null
+    private var product: Product? = null
     private var productId: String? = ""
 
     private var isDescriptionVisible = true
@@ -72,6 +72,18 @@ class ProductFragment : Fragment() {
         }
     }
 
+    private fun initFavoriteButton() {
+        setFavoriteButtonIcon()
+
+        binding.addToFavoriteButton.setOnClickListener {
+            product?.let {
+                viewModel.toggleFavorite(product!!.id)
+                product!!.isFavorite = !product!!.isFavorite
+                setFavoriteButtonIcon()
+            }
+        }
+    }
+
     private fun setFavoriteButtonIcon() {
         if (product?.isFavorite == true) {
             binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_filled)
@@ -104,7 +116,7 @@ class ProductFragment : Fragment() {
 
         initViewPager()
 
-        setFavoriteButtonIcon()
+        initFavoriteButton()
 
         binding.titleTextView.text = product?.title
         binding.subtitleTextView.text = product?.subtitle
@@ -193,7 +205,6 @@ class ProductFragment : Fragment() {
             frameLayout.addView(divider)
             infoLinearLayout.addView(frameLayout)
         }
-
 
         // Состав
         binding.ingredientsTextView.text = product?.ingredients

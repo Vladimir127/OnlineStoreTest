@@ -1,4 +1,4 @@
-package com.example.onlinestoretest
+package com.example.onlinestoretest.utils
 
 import android.content.Context
 import android.graphics.Color
@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
-import com.example.onlinestoretest.utils.dpToPx
+import com.example.onlinestoretest.R
 
 class CenteredTitleToolbar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".presentation.main.catalog.CatalogFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,13 +11,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Spinner
-            android:id="@+id/sort_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_margin="@dimen/margin_default"
+        <HorizontalScrollView
+            android:id="@+id/settings_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_default"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/sort_spinner"
+                    style="@style/CustomSpinnerStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginEnd="@dimen/margin_default" />
+
+                <Button
+                    android:id="@+id/filter_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@android:color/transparent"
+                    android:drawableLeft="@drawable/ic_filter"
+                    android:fontFamily="@font/sf_pro_display_regular"
+                    android:padding="0dp"
+                    android:text="Фильтры"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <HorizontalScrollView
             android:id="@+id/chips_scroll_view"
@@ -27,54 +57,56 @@
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/sort_spinner">
+            app:layout_constraintTop_toBottomOf="@id/settings_scroll_view">
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chip_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:paddingStart="@dimen/margin_default"
+                android:paddingEnd="@dimen/margin_default"
                 app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/watch_all_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/CustomChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:tag="watch_all"
-                    android:text="Смотреть все" />
+                    android:text="@string/tag_watch_all" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/face_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/CustomChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:tag="face"
-                    android:text="Лицо" />
+                    android:text="@string/tag_face" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/body_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/CustomChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:tag="body"
-                    android:text="Тело" />
+                    android:text="@string/tag_body" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/suntan_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/CustomChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:tag="suntan"
-                    android:text="Загар" />
+                    android:text="@string/tad_suntan" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/masks_chip"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    style="@style/CustomChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:tag="mask"
-                    android:text="Маски" />
+                    android:text="@string/tag_mask" />
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 
@@ -101,11 +133,11 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:indeterminateTint="@color/pink"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:indeterminateTint="@color/pink"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -119,26 +151,26 @@
             android:id="@+id/error_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
             android:fontFamily="@font/sf_pro_display_medium"
             android:text="@string/error_loading_data"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:layout_marginBottom="@dimen/margin_default"
+            app:layout_constraintBottom_toTopOf="@id/retry_button"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/retry_button"
-            app:layout_constraintVertical_chainStyle="packed"/>
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <FrameLayout
             android:id="@+id/retry_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_default"
             android:background="@drawable/rounded_rectangle_pink"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="@dimen/margin_default"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/error_text_view">
 
             <TextView

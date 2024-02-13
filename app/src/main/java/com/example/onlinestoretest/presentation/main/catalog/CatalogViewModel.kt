@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.onlinestoretest.domain.repository.CatalogRepository
 import com.example.onlinestoretest.domain.models.Product
 import com.example.onlinestoretest.infrastructure.MyApp
 import kotlinx.coroutines.launch
@@ -19,8 +18,8 @@ class CatalogViewModel (application: Application) : AndroidViewModel(application
         (application as MyApp).appComponent.inject(this)
     }
 
-    private val _products: MutableLiveData<List<com.example.onlinestoretest.domain.models.Product>> = MutableLiveData()
-    val products: LiveData<List<com.example.onlinestoretest.domain.models.Product>>
+    private val _products: MutableLiveData<List<Product>> = MutableLiveData()
+    val products: LiveData<List<Product>>
         get() = _products
 
     private val _error: MutableLiveData<Throwable> = MutableLiveData()
