@@ -36,9 +36,9 @@
             style="@style/StrikeThroughTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_tiny"
+            android:layout_marginBottom="@dimen/margin_tiny"
             android:fontFamily="@font/sf_pro_display_regular"
             android:textColor="@color/text_grey"
             android:textSize="@dimen/element_text_size"
@@ -47,8 +47,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_tiny"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
@@ -58,13 +58,13 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sf_pro_display_medium"
                 android:textColor="@color/black"
-                android:textSize="@dimen/title2_size"
+                android:textSize="@dimen/title2"
                 tools:text="000 ₽" />
 
             <TextView
                 android:id="@+id/discount_text_view"
                 android:layout_width="34dp"
-                android:layout_height="16dp"
+                android:layout_height="@dimen/margin_default"
                 android:layout_marginStart="@dimen/margin_half"
                 android:background="@drawable/rounded_rectangle_pink"
                 android:fontFamily="@font/sf_pro_display_regular"
@@ -78,22 +78,22 @@
             android:id="@+id/full_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_tiny"
             android:fontFamily="@font/sf_pro_display_medium"
-            android:textSize="16sp"
+            android:textSize="@dimen/title1"
             tools:text="ESFOLIO" />
 
         <TextView
             android:id="@+id/phone_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_tiny"
+            android:layout_marginEnd="@dimen/margin_small"
             android:fontFamily="@font/sf_pro_display_regular"
             android:lines="3"
-            android:textSize="10sp"
+            android:textSize="@dimen/caption1"
             tools:text="Лосьон для тела `ESFOLIO` COENZYME Q10 Увлажняющий 500 мл" />
 
         <LinearLayout
@@ -102,27 +102,27 @@
             android:orientation="horizontal"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="2dp"
+            android:layout_marginEnd="@dimen/margin_tiny"
             android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/rating_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                android:layout_marginStart="@dimen/margin_tiny"
                 android:fontFamily="@font/sf_pro_display_regular"
                 android:textColor="@color/orange"
-                android:textSize="9sp"
+                android:textSize="@dimen/element_text_size"
                 tools:text="0.0" />
 
             <TextView
                 android:id="@+id/count_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                android:layout_marginStart="@dimen/margin_tiny"
                 android:fontFamily="@font/sf_pro_display_regular"
                 android:textColor="@color/text_grey"
-                android:textSize="9sp"
+                android:textSize="@dimen/element_text_size"
                 tools:text="(0)" />
         </LinearLayout>
     </LinearLayout>

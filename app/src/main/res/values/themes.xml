@@ -30,7 +30,7 @@
     <style name="TextInputEditTextStyle" parent="Widget.Material3.TextInputEditText.FilledBox">
         <item name="android:backgroundTint">@color/light_gray</item>
         <item name="android:fontFamily">@font/sf_pro_display_regular</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/title1</item>
     </style>
 
     <style name="StrikeThroughTextView">
@@ -64,20 +64,15 @@
 
     <style name="BottomNavigationTextStyle">
         <item name="android:fontFamily">@font/sf_pro_display_regular</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">@dimen/caption1</item>
     </style>
 
     <style name="CustomChip" parent="@style/Widget.MaterialComponents.Chip.Choice">
         <item name="android:fontFamily">@font/sf_pro_display_medium</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/title2</item>
         <item name="chipBackgroundColor">@color/bg_chip_state_list</item>
         <item name="android:textColor">@color/text_color_chip_state_list</item>
         <item name="closeIcon">@drawable/ic_clear_white</item>
         <item name="closeIconTint">@color/white</item>
-    </style>
-
-    <style name="CustomSpinnerStyle" parent="Widget.AppCompat.Spinner">
-        <item name="android:fontFamily">@font/sf_pro_display_regular</item>
-        <item name="android:textSize">20sp</item>
     </style>
 </resources>

@@ -9,12 +9,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="@dimen/button_height"
         android:background="@drawable/rounded_rectangle_grey"
         android:layout_marginStart="@dimen/margin_default"
         android:layout_marginEnd="@dimen/margin_default"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp">
+        android:layout_marginTop="@dimen/icon_size"
+        android:layout_marginBottom="@dimen/icon_size">
 
         <ImageView
             android:id="@+id/name_icon_image_view"
@@ -33,8 +33,8 @@
             android:layout_marginStart="@dimen/margin_default"
             android:fontFamily="@font/sf_pro_display_medium"
             android:textColor="@color/black"
-            android:textSize="14sp"
-            android:layout_marginBottom="6dp"
+            android:textSize="@dimen/title2"
+            android:layout_marginBottom="@dimen/margin_small"
             app:layout_constraintStart_toEndOf="@id/name_icon_image_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/phone_text_view"
@@ -48,7 +48,7 @@
             android:layout_marginStart="@dimen/margin_default"
             android:fontFamily="@font/sf_pro_display_regular"
             android:textColor="@color/text_grey"
-            android:textSize="10sp"
+            android:textSize="@dimen/caption1"
             app:layout_constraintStart_toEndOf="@id/name_icon_image_view"
             app:layout_constraintTop_toBottomOf="@id/full_name_text_view"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -68,7 +68,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/favorites_layout"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="@dimen/button_height"
         android:background="@drawable/rounded_rectangle_grey"
         android:layout_marginStart="@dimen/margin_default"
         android:layout_marginEnd="@dimen/margin_default"
@@ -91,7 +91,7 @@
             android:layout_marginStart="@dimen/margin_default"
             android:fontFamily="@font/sf_pro_display_medium"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/title2"
             app:layout_constraintStart_toEndOf="@id/ic_fav_image_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/fav_count_text_view"
@@ -105,8 +105,8 @@
             android:layout_marginStart="@dimen/margin_default"
             android:fontFamily="@font/sf_pro_display_regular"
             android:textColor="@color/text_grey"
-            android:layout_marginTop="6dp"
-            android:textSize="10sp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:textSize="@dimen/caption1"
             app:layout_constraintStart_toEndOf="@id/ic_fav_image_view"
             app:layout_constraintTop_toBottomOf="@id/fav_title_text_view"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -125,7 +125,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="@dimen/button_height"
         android:background="@drawable/rounded_rectangle_grey"
         android:layout_marginStart="@dimen/margin_default"
         android:layout_marginEnd="@dimen/margin_default"
@@ -147,7 +147,7 @@
             android:layout_marginStart="@dimen/margin_default"
             android:fontFamily="@font/sf_pro_display_medium"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/title2"
             app:layout_constraintStart_toEndOf="@id/shop_image_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -167,7 +167,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="@dimen/button_height"
         android:background="@drawable/rounded_rectangle_grey"
         android:layout_marginStart="@dimen/margin_default"
         android:layout_marginEnd="@dimen/margin_default"
@@ -189,7 +189,7 @@
             android:layout_marginStart="@dimen/margin_default"
             android:fontFamily="@font/sf_pro_display_medium"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/title2"
             app:layout_constraintStart_toEndOf="@id/feedback_image_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -209,7 +209,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="@dimen/button_height"
         android:background="@drawable/rounded_rectangle_grey"
         android:layout_marginStart="@dimen/margin_default"
         android:layout_marginEnd="@dimen/margin_default"
@@ -231,7 +231,7 @@
             android:layout_marginStart="@dimen/margin_default"
             android:fontFamily="@font/sf_pro_display_medium"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/title2"
             app:layout_constraintStart_toEndOf="@id/offer_image_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -251,7 +251,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="@dimen/button_height"
         android:background="@drawable/rounded_rectangle_grey"
         android:layout_marginStart="@dimen/margin_default"
         android:layout_marginEnd="@dimen/margin_default"
@@ -273,7 +273,7 @@
             android:layout_marginStart="@dimen/margin_default"
             android:fontFamily="@font/sf_pro_display_medium"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/title2"
             app:layout_constraintStart_toEndOf="@id/back_image_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -299,7 +299,7 @@
     <FrameLayout
         android:id="@+id/logout_button"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="@dimen/button_height"
         android:background="@drawable/rounded_rectangle_grey"
         android:layout_marginStart="@dimen/margin_default"
         android:layout_marginEnd="@dimen/margin_default"
@@ -310,7 +310,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/sf_pro_display_medium"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/title2"
             android:layout_gravity="center"
             android:text="@string/logout" />
     </FrameLayout>

@@ -28,24 +28,23 @@
 
                 <Spinner
                     android:id="@+id/sort_spinner"
-                    style="@style/CustomSpinnerStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="24dp"
+                    android:layout_height="@dimen/icon_size"
                     android:layout_marginStart="@dimen/margin_default"
                     android:layout_marginEnd="@dimen/margin_default" />
 
                 <Button
                     android:id="@+id/filter_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="2dp"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_marginEnd="@dimen/margin_tiny"
                     android:background="@android:color/transparent"
                     android:drawableLeft="@drawable/ic_filter"
                     android:fontFamily="@font/sf_pro_display_regular"
                     android:padding="0dp"
                     android:text="Фильтры"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/title2" />
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -155,7 +154,7 @@
             android:fontFamily="@font/sf_pro_display_medium"
             android:text="@string/error_loading_data"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="@dimen/title1"
             app:layout_constraintBottom_toTopOf="@id/retry_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +178,7 @@
                 android:fontFamily="@font/sf_pro_display_medium"
                 android:text="@string/retry"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="@dimen/title2" />
 
         </FrameLayout>
 
