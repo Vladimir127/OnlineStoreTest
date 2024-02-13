@@ -13,6 +13,9 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import com.example.onlinestoretest.R
 
+/**
+ * Кастомный Toolbar с расширенными возможностями настройки внешнего вида
+ */
 class CenteredTitleToolbar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : Toolbar(context, attrs, defStyleAttr) {

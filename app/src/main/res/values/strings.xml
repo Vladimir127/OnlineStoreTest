@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OnlineStoreTest</string>
+    <string name="app_name">Онлайн-магазин</string>
     <string name="to_log_in">Войти</string>
     <string name="login">Вход</string>
     <string name="main">Главная</string>

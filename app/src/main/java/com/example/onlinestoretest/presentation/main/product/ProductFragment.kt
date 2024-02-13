@@ -72,32 +72,6 @@ class ProductFragment : Fragment() {
         }
     }
 
-    private fun initFavoriteButton() {
-        setFavoriteButtonIcon()
-
-        binding.addToFavoriteButton.setOnClickListener {
-            product?.let {
-                viewModel.toggleFavorite(product!!.id)
-                product!!.isFavorite = !product!!.isFavorite
-                setFavoriteButtonIcon()
-            }
-        }
-    }
-
-    private fun setFavoriteButtonIcon() {
-        if (product?.isFavorite == true) {
-            binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_filled)
-        } else {
-            binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_stroke)
-        }
-    }
-
-    private fun initViewPager() {
-        binding.imageViewPager.adapter = imageAdapter
-        imageAdapter.setData(imageMap[product?.id] ?: emptyList())
-        TabLayoutMediator(binding.tabLayout, binding.imageViewPager) { tab, position ->}.attach()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -134,7 +108,46 @@ class ProductFragment : Fragment() {
         binding.oldPriceTextView.text = resources.getString(R.string.price_with_unit, product?.price?.price, product?.price?.unit)
         binding.discountTextView.text = resources.getString(R.string.discount, product?.price?.discount)
 
-        // Описание
+        initDescription()
+
+        initInfoList()
+
+        initIngredients()
+
+        binding.priceTextView1.text = resources.getString(R.string.price_with_unit, product?.price?.priceWithDiscount, product?.price?.unit)
+        binding.oldPriceTextView1.text = resources.getString(R.string.price_with_unit, product?.price?.price, product?.price?.unit)
+    }
+
+    private fun initViewPager() {
+        binding.imageViewPager.adapter = imageAdapter
+        imageAdapter.setData(imageMap[product?.id] ?: emptyList())
+        TabLayoutMediator(binding.tabLayout, binding.imageViewPager) { tab, position ->}.attach()
+    }
+
+    private fun initFavoriteButton() {
+        setFavoriteButtonIcon()
+
+        binding.addToFavoriteButton.setOnClickListener {
+            product?.let {
+                viewModel.toggleFavorite(product!!.id)
+                product!!.isFavorite = !product!!.isFavorite
+                setFavoriteButtonIcon()
+            }
+        }
+    }
+
+    private fun setFavoriteButtonIcon() {
+        if (product?.isFavorite == true) {
+            binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_filled)
+        } else {
+            binding.addToFavoriteButton.setImageResource(R.drawable.ic_heart_stroke)
+        }
+    }
+
+    /**
+     * Отображает бренд и описание, а также инициализирует TextView для их сворачивания/разворачивания
+     */
+    private fun initDescription() {
         binding.brandTextView.text = product?.title
         binding.descriptionTextView.text = product?.description
         binding.hideDescriptionTextView.setOnClickListener {
@@ -150,7 +163,12 @@ class ProductFragment : Fragment() {
 
             isDescriptionVisible = !isDescriptionVisible
         }
+    }
 
+    /**
+     * Отображает таблицу характеристик
+     */
+    private fun initInfoList() {
         val infoLinearLayout = binding.characteristicsTable
         val infoList = product?.info ?: emptyList()
 
@@ -205,13 +223,19 @@ class ProductFragment : Fragment() {
             frameLayout.addView(divider)
             infoLinearLayout.addView(frameLayout)
         }
+    }
 
-        // Состав
+    /**
+     * Отображает ингредиенты (состав), а также инициализирует TextView для их сворачивания/разворачивания
+     */
+    private fun initIngredients() {
         binding.ingredientsTextView.text = product?.ingredients
 
+        // Определяем количество строк в составе: если более 2, то сворачиваем до 2 строк,
+        // отображаем многоочие и TextView для их сворачивания/разворачивания
         binding.ingredientsTextView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
-                binding.ingredientsTextView.viewTreeObserver.removeOnGlobalLayoutListener(this) // Удаляем слушатель после первого вызова
+                binding.ingredientsTextView.viewTreeObserver.removeOnGlobalLayoutListener(this)
 
                 val layout = binding.ingredientsTextView.layout
                 val lineCount = layout.lineCount
@@ -224,6 +248,7 @@ class ProductFragment : Fragment() {
             }
         })
 
+        // Обработчик нажатия на ссылку для сворачивания/разворачивания
         binding.hideIngredientsTextView.setOnClickListener {
             if (areIngredientsExpanded) {
                 binding.ingredientsTextView.maxLines = 2
@@ -237,9 +262,6 @@ class ProductFragment : Fragment() {
 
             areIngredientsExpanded = !areIngredientsExpanded
         }
-
-        binding.priceTextView1.text = resources.getString(R.string.price_with_unit, product?.price?.priceWithDiscount, product?.price?.unit)
-        binding.oldPriceTextView1.text = resources.getString(R.string.price_with_unit, product?.price?.price, product?.price?.unit)
     }
 
     private fun showError() {

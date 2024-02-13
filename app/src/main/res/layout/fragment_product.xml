@@ -148,7 +148,7 @@
                 android:layout_marginTop="@dimen/margin_default"
                 android:fontFamily="@font/sf_pro_display_medium"
                 android:textColor="@color/black"
-                android:textSize="@dimen/icon_size"
+                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rating_bar"
                 tools:text="000 ₽" />
@@ -334,7 +334,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/add_to_cart_layout"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
+                android:layout_height="@dimen/button_height"
                 android:layout_marginStart="@dimen/margin_default"
                 android:layout_marginTop="@dimen/margin_double"
                 android:layout_marginEnd="@dimen/margin_default"

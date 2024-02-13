@@ -6,7 +6,6 @@ import com.example.onlinestoretest.domain.repository.UserRepository
 
 class UserRepositoryImpl(private val sharedPreferences: SharedPreferences) : UserRepository {
     private companion object {
-        const val PREF_NAME = "user_prefs"
         const val KEY_FIRST_NAME = "first_name"
         const val KEY_LAST_NAME = "last_name"
         const val KEY_PHONE_NUMBER = "phone_number"

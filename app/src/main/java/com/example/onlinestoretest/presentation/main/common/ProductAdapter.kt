@@ -11,6 +11,9 @@ import com.example.onlinestoretest.domain.models.Product
 import com.example.onlinestoretest.utils.ImageMapUtil.Companion.imageMap
 import com.google.android.material.tabs.TabLayoutMediator
 
+/**
+ * Адаптер для списка товаров. Используется в разделах "Каталог" и "Избранное"
+ */
 class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
     var onItemClickListener: OnItemClickListener? = null
     var favoriteItemClickListener: FavoriteItemClickListener? = null
@@ -104,7 +107,6 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
         }
 
         private fun initViewPager() {
-
             imageAdapter.setData(imageMap[product.id] ?: emptyList())
             TabLayoutMediator(binding.tabLayout, binding.imageViewPager) { tab, position -> }.attach()
         }

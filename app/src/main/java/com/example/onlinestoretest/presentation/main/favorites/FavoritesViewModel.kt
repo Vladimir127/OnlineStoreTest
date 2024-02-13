@@ -20,7 +20,6 @@ class FavoritesViewModel(application: Application): AndroidViewModel(application
     }
 
     private val _favoriteProducts: MutableLiveData<List<Product>> = MutableLiveData()
-
     val favoriteProducts: LiveData<List<Product>>
         get() = _favoriteProducts
 

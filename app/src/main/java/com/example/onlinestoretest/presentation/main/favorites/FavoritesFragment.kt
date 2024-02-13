@@ -12,13 +12,14 @@ import com.example.onlinestoretest.databinding.FragmentFavoritesBinding
 import com.example.onlinestoretest.domain.models.Product
 import com.example.onlinestoretest.presentation.main.common.ProductAdapter
 
-class FavoritesFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
+class FavoritesFragment : Fragment() {
 
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var viewModel: FavoritesViewModel
     private lateinit var productAdapter: ProductAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,10 +68,6 @@ class FavoritesFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onToggleFavorite(productId: String) {
-
     }
 
     private fun showLoading() {

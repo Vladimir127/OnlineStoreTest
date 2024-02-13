@@ -66,6 +66,9 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         _navigateToMain.value = true
     }
 
+    /**
+     * Проверяет, сохранены ли в SharedPreferences учётные данные пользователя
+     */
     fun checkUserData() {
         if (userRepository.isUserDataFilled()) {
             _navigateToMain.value = true

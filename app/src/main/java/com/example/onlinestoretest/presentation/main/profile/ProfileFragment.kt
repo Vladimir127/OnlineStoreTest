@@ -16,7 +16,8 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
-    private lateinit var profileViewModel: ProfileViewModel
+
+    private lateinit var viewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,40 +30,44 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        profileViewModel = ViewModelProvider(this@ProfileFragment)[ProfileViewModel::class.java]
+        viewModel = ViewModelProvider(this@ProfileFragment)[ProfileViewModel::class.java]
 
-        profileViewModel.userData.observe(viewLifecycleOwner) { userData ->
+        // Отобажаем персональные данные пользователя
+        viewModel.userData.observe(viewLifecycleOwner) { userData ->
             binding.fullNameTextView.text =
                 resources.getString(R.string.full_name, userData.name, userData.surname)
             binding.phoneTextView.text = userData.phoneNumber
         }
-        profileViewModel.loadData()
+        viewModel.loadData()
 
-        profileViewModel.favoritesCount.observe(viewLifecycleOwner) { count ->
+        // Отображаем количество товаров в избранном
+        viewModel.favoritesCount.observe(viewLifecycleOwner) { count ->
             if (count == 0) {
                 binding.favCountTextView.visibility = View.GONE
             } else {
                 binding.favCountTextView.visibility = View.VISIBLE
-                val favoritesCountText = resources.getQuantityString(R.plurals.products, count, count)
+                val favoritesCountText =
+                    resources.getQuantityString(R.plurals.products, count, count)
                 binding.favCountTextView.text = favoritesCountText
             }
         }
-        profileViewModel.loadFavoritesCount()
+        viewModel.loadFavoritesCount()
 
-        profileViewModel.navigateToLogin.observe(viewLifecycleOwner) { navigateToLogin ->
+        // Обработка нажатия на кнопку "Избранное" - открываем FavoritesFragment
+        binding.favoritesLayout.setOnClickListener {
+            it.findNavController().navigate(R.id.action_profileFragment_to_favoritesFragment)
+        }
+
+        // Обработка нажатия на кнопку "Выйти" - запускаем LoginActivity и завершаем текущую
+        viewModel.navigateToLogin.observe(viewLifecycleOwner) { navigateToLogin ->
             if (navigateToLogin) {
                 val intent = Intent(requireContext(), LoginActivity::class.java)
                 startActivity(intent)
                 activity?.finish()
             }
         }
-
-        binding.favoritesLayout.setOnClickListener {
-            it.findNavController().navigate(R.id.action_profileFragment_to_favoritesFragment)
-        }
-
-        binding.logoutButton.setOnClickListener{
-            profileViewModel.logout()
+        binding.logoutButton.setOnClickListener {
+            viewModel.logout()
         }
     }
 

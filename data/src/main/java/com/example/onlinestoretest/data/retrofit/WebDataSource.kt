@@ -8,6 +8,8 @@ class WebDataSource(private val productService: ProductService) {
     suspend fun getProducts(): List<Product> {
         return withContext(Dispatchers.IO) {
             try {
+                // Чтобы обратиться к серверу без конкретного эндпоинта,
+                // необходимо передать пустую строку в качестве URL
                 productService.getProducts("").items
             } catch (e: Exception) {
                 throw e

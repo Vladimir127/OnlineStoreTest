@@ -16,7 +16,7 @@ import com.example.onlinestoretest.domain.models.Product
 import com.example.onlinestoretest.presentation.main.common.ProductAdapter
 import com.google.android.material.chip.Chip
 
-class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
+class CatalogFragment : Fragment() {
 
     private var _binding: FragmentCatalogBinding? = null
     private val binding get() = _binding!!
@@ -55,12 +55,7 @@ class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
             val gridLayoutManager = GridLayoutManager(context, 2)
             layoutManager = gridLayoutManager
 
-
-
-
             adapter = productAdapter
-
-
         }
 
         viewModel.products.observe(viewLifecycleOwner) { products ->
@@ -78,7 +73,10 @@ class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
     }
 
     private fun initSpinner() {
-        val sortOptions = arrayOf("По популярности", "По уменьшению цены", "По возрастанию цены")
+        val sortOptions = arrayOf(
+            requireContext().resources.getString(R.string.sort_popularity),
+            requireContext().resources.getString(R.string.sort_price_descending),
+            requireContext().resources.getString(R.string.sort_price_ascending))
 
         val adapter = CustomSpinnerAdapter(requireContext(), sortOptions)
         binding.sortSpinner.adapter = adapter
@@ -86,13 +84,10 @@ class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
         binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedSortOption = sortOptions[position]
-                // Вызов метода в адаптере для выполнения сортировки
                 productAdapter.sortBy(selectedSortOption)
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Обработка случая, когда ничего не выбрано
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
 
@@ -149,10 +144,6 @@ class CatalogFragment : Fragment(), ProductAdapter.FavoriteItemClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onToggleFavorite(productId: String) {
-
     }
 
     private fun showLoading() {

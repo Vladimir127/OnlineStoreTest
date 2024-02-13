@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.onlinestoretest.R
 import com.squareup.picasso.Picasso
 
+/**
+ * Адаптер для ViewPager2. Используется в карточке товара в RecyclerView и на странице товара
+ */
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
     var onImageClickListener: OnImageClickListener? = null

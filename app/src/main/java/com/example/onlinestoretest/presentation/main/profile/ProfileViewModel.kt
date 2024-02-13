@@ -16,10 +16,6 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     @Inject
     lateinit var userRepository: UserRepository
 
-    init {
-        (application as MyApp).appComponent.inject(this)
-    }
-
     @Inject
     lateinit var catalogRepository: CatalogRepository
 
