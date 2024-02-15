@@ -3,9 +3,9 @@ package com.example.onlinestoretest.presentation.main.common
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onlinestoretest.R
+import com.example.onlinestoretest.databinding.ItemImageBinding
 import com.squareup.picasso.Picasso
 
 /**
@@ -32,11 +32,11 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
     override fun getItemCount(): Int = images.size
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val imageView: ImageView = itemView.findViewById(R.id.imageView)
+        private val binding = ItemImageBinding.bind(itemView)
 
         fun bind(position: Int) {
             val imageResourceId = images[position]
-            Picasso.get().load(imageResourceId).into(imageView)
+            Picasso.get().load(imageResourceId).into(binding.imageView)
 
             itemView.setOnClickListener {
                 onImageClickListener?.onImageClick()

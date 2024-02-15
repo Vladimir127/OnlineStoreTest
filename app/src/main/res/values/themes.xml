@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.OnlineStoreTest" parent="Theme.Material3.DayNight.NoActionBar">
 
@@ -74,5 +74,15 @@
         <item name="android:textColor">@color/text_color_chip_state_list</item>
         <item name="closeIcon">@drawable/ic_clear_white</item>
         <item name="closeIconTint">@color/white</item>
+    </style>
+
+    <style name="TabLayoutTextStyle">
+        <item name="android:fontFamily">@font/sf_pro_display_regular</item>
+        <item name="android:textSize">@dimen/title2</item>
+    </style>
+
+    <style name="TabLayoutTextStyleSelected">
+        <item name="android:fontFamily">@font/sf_pro_display_medium</item>
+        <item name="android:textSize">@dimen/title2</item>
     </style>
 </resources>

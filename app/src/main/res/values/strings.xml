@@ -41,6 +41,8 @@
     <string name="tag_body">Тело</string>
     <string name="tad_suntan">Загар</string>
     <string name="tag_mask">Маски</string>
+    <string name="products">Товары</string>
+    <string name="brands">Бренды</string>
 
     <plurals name="reviews">
         <item quantity="one">%d отзыв</item>
