@@ -38,20 +38,21 @@ class CatalogFragment : Fragment() {
         viewModel = ViewModelProvider(this@CatalogFragment)[CatalogViewModel::class.java]
 
         productAdapter = ProductAdapter(requireContext())
-        productAdapter.onItemClickListener = object : ProductAdapter.OnItemClickListener {
-            override fun onItemClick(productId: String) {
-                val action = CatalogFragmentDirections.actionCatalogFragmentToProductFragment(productId)
-                view.findNavController().navigate(action)
-            }
+        productAdapter.onItemClickListener = { productId ->
+            val action = CatalogFragmentDirections.actionCatalogFragmentToProductFragment(productId)
+            view.findNavController().navigate(action)
         }
 
-        productAdapter.favoriteItemClickListener = object : ProductAdapter.FavoriteItemClickListener {
-            override fun onToggleFavorite(productId: String) {
-                viewModel.toggleFavorite(productId)
+        productAdapter.favoriteItemClickListener =
+            object : ProductAdapter.FavoriteItemClickListener {
+                override fun onToggleFavorite(productId: String) {
+                    viewModel.toggleFavorite(productId)
+                }
             }
-        }
 
         binding.recyclerView.apply {
+            setItemViewCacheSize(10)
+
             val gridLayoutManager = GridLayoutManager(context, 2)
             layoutManager = gridLayoutManager
 
@@ -76,13 +77,19 @@ class CatalogFragment : Fragment() {
         val sortOptions = arrayOf(
             requireContext().resources.getString(R.string.sort_popularity),
             requireContext().resources.getString(R.string.sort_price_descending),
-            requireContext().resources.getString(R.string.sort_price_ascending))
+            requireContext().resources.getString(R.string.sort_price_ascending)
+        )
 
         val adapter = CustomSpinnerAdapter(requireContext(), sortOptions)
         binding.sortSpinner.adapter = adapter
 
         binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val selectedSortOption = sortOptions[position]
                 productAdapter.sortBy(selectedSortOption)
             }

@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso
  */
 class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
-    var onImageClickListener: OnImageClickListener? = null
+    var onImageClickListener: (() -> Unit)? = null
     private var images: List<Int> = emptyList()
 
     fun setData(images: List<Int>) {
@@ -39,12 +39,8 @@ class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
             Picasso.get().load(imageResourceId).into(binding.imageView)
 
             itemView.setOnClickListener {
-                onImageClickListener?.onImageClick()
+                onImageClickListener?.invoke()
             }
         }
-    }
-
-    interface OnImageClickListener {
-        fun onImageClick()
     }
 }

@@ -1,6 +1,5 @@
 package com.example.onlinestoretest.data.room
 
-import com.example.onlinestoretest.data.room.FavoriteDao
 import com.example.onlinestoretest.data.room.entities.FavoriteEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

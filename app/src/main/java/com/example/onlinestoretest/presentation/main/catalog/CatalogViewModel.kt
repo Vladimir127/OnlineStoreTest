@@ -11,7 +11,7 @@ import com.example.onlinestoretest.infrastructure.MyApp
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class CatalogViewModel (application: Application) : AndroidViewModel(application) {
+class CatalogViewModel(application: Application) : AndroidViewModel(application) {
     @Inject
     lateinit var catalogRepository: CatalogRepository
 

@@ -14,8 +14,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 /**
  * Адаптер для списка товаров. Используется в разделах "Каталог" и "Избранное"
  */
-class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
-    var onItemClickListener: OnItemClickListener? = null
+class ProductAdapter(val context: Context) :
+    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+    var onItemClickListener: ((String) -> Unit)? = null
     var favoriteItemClickListener: FavoriteItemClickListener? = null
 
     private var originalProducts: List<Product> = emptyList()
@@ -77,6 +78,8 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
 
         init {
             binding.imageViewPager.adapter = imageAdapter
+
+            setOnClickListeners()
         }
 
         fun bind(product: Product) {
@@ -84,13 +87,22 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
 
             initViewPager()
             initFavoriteButton()
-            setOnClickListeners()
+
 
             binding.titleTextView.text = product.title
             binding.subtitleTextView.text = product.subtitle
-            binding.oldPriceTextView.text = context.resources.getString(R.string.price_with_unit, product.price.price, product.price.unit)
-            binding.priceTextView.text = context.resources.getString(R.string.price_with_unit, product.price.priceWithDiscount, product.price.unit)
-            binding.discountTextView.text = context.resources.getString(R.string.discount, product.price.discount)
+            binding.oldPriceTextView.text = context.resources.getString(
+                R.string.price_with_unit,
+                product.price.price,
+                product.price.unit
+            )
+            binding.priceTextView.text = context.resources.getString(
+                R.string.price_with_unit,
+                product.price.priceWithDiscount,
+                product.price.unit
+            )
+            binding.discountTextView.text =
+                context.resources.getString(R.string.discount, product.price.discount)
 
             if (product.feedback == null) {
                 binding.zvImageView.visibility = View.INVISIBLE
@@ -102,13 +114,17 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
                 binding.countTextView.visibility = View.VISIBLE
 
                 binding.ratingTextView.text = product.feedback.rating.toString()
-                binding.countTextView.text = context.resources.getString(R.string.feedback_count, product.feedback.count)
+                binding.countTextView.text =
+                    context.resources.getString(R.string.feedback_count, product.feedback.count)
             }
         }
 
         private fun initViewPager() {
             imageAdapter.setData(imageMap[product.id] ?: emptyList())
-            TabLayoutMediator(binding.tabLayout, binding.imageViewPager) { tab, position -> }.attach()
+            TabLayoutMediator(
+                binding.tabLayout,
+                binding.imageViewPager
+            ) { tab, position -> }.attach()
         }
 
         private fun initFavoriteButton() {
@@ -131,22 +147,16 @@ class ProductAdapter(val context: Context) : RecyclerView.Adapter<ProductAdapter
 
         private fun setOnClickListeners() {
             itemView.setOnClickListener {
-                onItemClickListener?.onItemClick(product.id)
+                onItemClickListener?.invoke(product.id)
             }
 
-            imageAdapter.onImageClickListener = object : ImageAdapter.OnImageClickListener{
-                override fun onImageClick() {
-                    onItemClickListener?.onItemClick(product.id)
-                }
+            imageAdapter.onImageClickListener = {
+                onItemClickListener?.invoke(product.id)
             }
         }
     }
 
     interface FavoriteItemClickListener {
         fun onToggleFavorite(productId: String)
-    }
-
-    interface OnItemClickListener {
-        fun onItemClick(productId: String)
     }
 }

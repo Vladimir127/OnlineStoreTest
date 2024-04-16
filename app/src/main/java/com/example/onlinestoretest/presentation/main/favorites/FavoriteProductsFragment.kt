@@ -30,21 +30,22 @@ class FavoriteProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this@FavoriteProductsFragment)[FavoriteProductsViewModel::class.java]
+        viewModel =
+            ViewModelProvider(this@FavoriteProductsFragment)[FavoriteProductsViewModel::class.java]
 
         productAdapter = ProductAdapter(requireContext())
-        productAdapter.onItemClickListener = object : ProductAdapter.OnItemClickListener {
-            override fun onItemClick(productId: String) {
-                val action = FavoritesFragmentDirections.actionFavoritesFragmentToProductFragment(productId)
-                view.findNavController().navigate(action)
-            }
+        productAdapter.onItemClickListener = { productId ->
+            val action =
+                FavoritesFragmentDirections.actionFavoritesFragmentToProductFragment(productId)
+            view.findNavController().navigate(action)
         }
 
-        productAdapter.favoriteItemClickListener = object : ProductAdapter.FavoriteItemClickListener {
-            override fun onToggleFavorite(productId: String) {
-                viewModel.toggleFavorite(productId)
+        productAdapter.favoriteItemClickListener =
+            object : ProductAdapter.FavoriteItemClickListener {
+                override fun onToggleFavorite(productId: String) {
+                    viewModel.toggleFavorite(productId)
+                }
             }
-        }
 
         binding.recyclerView.apply {
             val gridLayoutManager = GridLayoutManager(context, 2)
